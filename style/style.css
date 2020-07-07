@@ -1,0 +1,49 @@
+html,
+body {
+  overflow: hidden;
+}
+
+html,
+body,
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.d-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.nav-bar {
+  padding: 10px 15px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.nav-bar > div {
+  width: 33.33%;
+  width: calc(100% / 3);
+}
+
+.nav-bar h2 {
+  font-family: "Diablo-style";
+  color: #008000;
+  font-size: 40px;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: black;
+  z-index: -1;
+}
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="style/main.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="style/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDgsjfrYujjfpg9mOSMUb6d0CCU4s8po7s",
+            authDomain: "chat-room-8a43c.firebaseapp.com",
+            databaseURL: "https://chat-room-8a43c.firebaseio.com",
+            projectId: "chat-room-8a43c",
+            storageBucket: "chat-room-8a43c.appspot.com",
+            messagingSenderId: "478120048624",
+            appId: "1:478120048624:web:25738f9b2f529cc25f0f35",
+            measurementId: "G-1RKPM548PW"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+
+    <script src="./js/components.js"></script>
+    <script src="./js/model.js"></script>
+    <script src="./js/view.js"></script>
+    <script src="./js/controller.js"></script>
+    <script src="./js/until.js"></script>
+    <script src="./js/main.js"></script>
+</head>
+
+<body>
+    <div id="section-content">
+        <div id="abc">
+            <header class="nav-bar d-flex">
+                <div class="">
+
+                </div>
+                <div class="">
+                    <h2>Solo game</h2>
+                </div>
+                <div class="">
+                    <div>
+
+                    </div>
+                </div>
+            </header>
+        </div>
+    </div>
+    <canvas id=c></canvas>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+// font
+$font-diablo: 'Diablo-style';
+// text color
+$color-green : #008000;
+// font size
+
+html,
+body {
+    overflow: hidden;
+}
+
+html,
+body,
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.nav-bar {
+    padding: 10px 15px;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.5);
+
+    &>div {
+        width: 33.33%;
+        width: calc(100% / 3);
+    }
+
+    h2 {
+        font-family: $font-diablo;
+        color: $color-green;
+        font-size: 40px;
+    }
+}
+
+
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: black;
+    z-index: -1;
+}

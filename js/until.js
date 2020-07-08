@@ -45,12 +45,27 @@ function countTest(time) {
   }
 }
 countTest(5);
-// declare a stack of characters
-// while(there are more character in the word to read)
-// read a character 
-// push the character on the stack 
-// while(the stack is not empty)
-// write the stack's top character to the screen
-// pop a character off the stack 
-// let a;
-// while
+
+function readURL(input, place_img) {
+  if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+          place_img.attr('src', event.target.result)
+      }
+      reader.readAsDataURL(input.files[0]);
+  }
+}
+// window.onclick = function (e) {
+//   if (document.body.classList.contains('show-user-detail')) {
+//     if (!document.getElementById('sidenav').contains(e.target)) {
+//       console.log('ad')
+//       document.body.classList.remove('show-user-detail')
+//     } else{
+//       console.log('123')
+//     }
+//   }
+// }
+
+function userDetail() {
+  document.body.classList.add('show-user-detail')
+}

@@ -3,7 +3,7 @@ window.onload = function () {
     view.locationTime()
     firebase.auth().onAuthStateChanged(function (user) {
         if (user && user.emailVerified == true) {
-            view.showScreen('chat');
+            view.showScreen('menuGame');
         } 
         else if (user && user.emailVerified == false) {
             alert('confirm your email')

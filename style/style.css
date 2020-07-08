@@ -16,6 +16,21 @@ body,
   display: flex;
 }
 
+.d-flex-col {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.round-box {
+  border-radius: 99%;
+}
+
+button {
+  cursor: pointer;
+}
+
 .nav-bar {
   padding: 10px 15px;
   -webkit-box-pack: justify;
@@ -37,6 +52,107 @@ body,
   font-family: "Diablo-style";
   color: #008000;
   font-size: 40px;
+  text-align: center;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.sidenav form {
+  padding: 15px 40px 20px;
+}
+
+.main {
+  -webkit-transition: margin-left 0.5s;
+  transition: margin-left 0.5s;
+  padding: 20px;
+}
+
+.show-user-detail .sidenav {
+  width: 250px;
+}
+
+.show-user-detail .main {
+  margin-left: 250px;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.nav-user > a {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  color: #008000;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.nav-user img {
+  width: 50px;
+  height: 50px;
+}
+
+.change-img {
+  position: relative;
+}
+
+.change-img input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.change-img img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.row-input {
+  position: relative;
+  margin-top: 30px;
+}
+
+.row-input label {
+  color: #008000;
+  font-size: 24px;
+  position: absolute;
+}
+
+.row-input input {
+  background-color: transparent;
+  position: relative;
+}
+
+.row-input input::after {
+  content: '';
+  position: absolute;
+}
+
+.row-input i {
+  position: absolute;
 }
 
 canvas {

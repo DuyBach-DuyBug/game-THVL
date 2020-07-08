@@ -186,43 +186,19 @@ view.showScreen = async function (screenName) {
       };
 
       break;
-    case "chat":
-      content.innerHTML = components.chat;
+    case "menuGame":
+      content.innerHTML = components.menuGame;
       let listRoom = document.getElementById("list-room");
 
       await controller.loadConverstations();
-      // listRoom.innerHTML =  await controller.listRoom()
-      for (let [index, converstation] of model.converstations.entries()) {
-        let html = `<div><input type="radio" name="room" id="room-${index}" data-index="${index}" onchange="changeRoom(this)">
-                <label for="room-${index}" class="room-selected">
-                    <h4>${converstation.title}</h4>
-                    <p>${converstation.member.length} ${
-          converstation.member.length < 2 ? "memeber" : "members"
-        }</p>
-                </label></div>`;
-        listRoom.innerHTML += html;
-      }
-      // listRoom.onchange = async function(){
-      //     console.dir(listRoom)
-      // }
-      let logoutBtn = document.getElementById("logoutForm");
-      logoutBtn.onsubmit = function () {
-        controller.signOut();
+
+      document.getElementById("btnLogout").onsubmit = function (e) {
+        e.preventDefault();
+        console.log('ad')
+        // controller.signOut();
       };
       let createChat = document.getElementById("createChat");
-      createChat.onsubmit = async function (e) {
-        e.preventDefault();
-        let title = createChat.title.value;
-        let email = createChat.email.value;
-        let validate = [
-          view.validate(title != "", "title-error", "Input chat's title"),
-          view.validate(email != "", "email-error", "Input member's email"),
-        ];
 
-        if (!isPass(validate)) {
-          controller.createRoom(title, email);
-        }
-      };
       break;
   }
 };
@@ -246,6 +222,15 @@ view.setText = function (id, content) {
 view.setActive = function (id, active) {
   document.getElementById(id).disabled = active;
 };
+view.readURL = function (input, place_img) {
+  if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+          place_img.attr('src', event.target.result)
+      }
+      reader.readAsDataURL(input.files[0]);
+  }
+}
 view.locationTime = function () {
   let now = new Date();
   let h = now.getHours();

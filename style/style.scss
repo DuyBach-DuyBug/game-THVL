@@ -25,8 +25,8 @@ body,
 .round-box {
   border-radius: 99%;
 }
-button{
-    cursor: pointer;
+button {
+  cursor: pointer;
 }
 .nav-bar {
   padding: 10px 15px;
@@ -103,25 +103,36 @@ button{
     object-position: center;
   }
 }
-.row-input{
+.row-input {
+  position: relative;
+  margin-top: 30px;
+  label {
+    color: $color-green;
+    font-size: 24px;
+    position: absolute;
+  }
+  input {
+    background-color: transparent;
     position: relative;
-    margin-top: 30px;
-    label{
-        color: $color-green;
-        font-size: 24px;
-        position: absolute;
+    &::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 3px;
+      background: white;
+      left: 0;
+      bottom: 0;
+      display: block;
     }
-    input{
-        background-color: transparent;
-        position: relative;
-        &::after{
-            content: '';
-            position: absolute;
-        }
-    }
-    i{
-        position: absolute;
-    }
+  }
+  i {
+    position: absolute;
+  }
+  input:focus{
+      &::after{
+          width: 100%;
+      }
+  }
 }
 canvas {
   position: absolute;

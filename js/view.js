@@ -188,16 +188,11 @@ view.showScreen = async function (screenName) {
       break;
     case "menuGame":
       content.innerHTML = components.menuGame;
-      let listRoom = document.getElementById("list-room");
-
       await controller.loadConverstations();
-
       document.getElementById("btnLogout").onsubmit = function (e) {
         e.preventDefault();
-        console.log('ad')
-        // controller.signOut();
+        controller.signOut();
       };
-      let createChat = document.getElementById("createChat");
 
       break;
   }

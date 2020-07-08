@@ -4,12 +4,6 @@ controller.signUp = async function (name, email, password) {
     view.setText('signUp_message', '')
     try {
         await firebase.auth().createUserWithEmailAndPassword(email, password)
-
-        await firebase.auth().currentUser.updateProfile({
-            displayName: name,
-            photoURL: "https://example.com/jane-q-user/profile.jpg"
-        })
-
         await firebase.auth().currentUser.sendEmailVerification()
     } catch (error) {
         if (!document.getElementById('signUp_message').classList.contains('text-error')) {
@@ -27,6 +21,12 @@ controller.signIn = async function (email, password) {
         }
         await view.setText('signUp_message', error.message)
     }
+}
+controller.updateUser = async function (name){
+    await firebase.auth().currentUser.updateProfile({
+        displayName: name,
+        photoURL: "https://example.com/jane-q-user/profile.jpg"
+    })
 }
 controller.signOut = async function (){
     await firebase.auth().signOut()

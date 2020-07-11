@@ -1,17 +1,17 @@
 window.onload = function () {
     view.effectBackground()
-    view.locationTime()
     firebase.auth().onAuthStateChanged(function (user) {
-        if (user && user.emailVerified == true) {
+        if (user) {
             view.showScreen('menuGame');
+            view.locationTime()
         } 
-        else if (user && user.emailVerified == false) {
-            alert('confirm your email')
-            firebase.auth().signOut()
-            view.showScreen('signUp');
-        } 
+        // else if (user && user.emailVerified == false) {
+        //     alert('confirm your email')
+        //     firebase.auth().signOut()
+        //     view.showScreen('log');
+        // } 
         else {
-            view.showScreen('signUp');
+            view.showScreen('log');
         }
     });
 }

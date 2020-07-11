@@ -102,13 +102,13 @@ view.effectBackground = function () {
   };
   init();
   anim();
-  window.onresize = function (){
+  window.onresize = function () {
     w = c.width = window.innerWidth;
     h = c.height = window.innerHeight;
     starter.x = w / 2;
     starter.y = h / 2;
     init();
-  }
+  };
 };
 
 view.showScreen = async function (screenName) {
@@ -118,21 +118,33 @@ view.showScreen = async function (screenName) {
         chat --> show giao diện của chat 
     */
 
-  let content = document.getElementById("view_section");
+  let content = document.getElementById("section-content");
 
   switch (screenName) {
-    case "signIn":
+    case "log":
       // hiển thị giao diện của sign in
-      content.innerHTML = components.signIn;
+      content.innerHTML = components.log;
 
       // thêm sự kiện click cho sign-up-link --> giao diện sign up
 
-      let signUpLink = document.getElementById("sign-in-link");
-      signUpLink.onclick = function () {
-        view.showScreen("signUp");
-      };
+      // let signUpLink = document.getElementById("sign-in-link");
+      // signUpLink.onclick = function () {
+      //   view.showScreen("menuGame");
+      // };
+      const signUpButton = document.getElementById("signUp");
+      const signInButton = document.getElementById("signIn");
+      const container = document.getElementById("section-content");
+
+      signUpButton.addEventListener("click", () => {
+        container.classList.add("right-panel-active");
+      });
+
+      signInButton.addEventListener("click", () => {
+        container.classList.remove("right-panel-active");
+      });
       let formSignIn = document.getElementById("loginForm");
       formSignIn.onsubmit = function (event) {
+        debugger
         event.preventDefault();
         let email = formSignIn.email.value;
         let password = formSignIn.password.value;
@@ -193,7 +205,9 @@ view.showScreen = async function (screenName) {
         e.preventDefault();
         controller.signOut();
       };
-
+      document.getElementById("exitSidenav").onclick = function () {
+        document.body.classList.remove("show-user-detail");
+      };
       break;
   }
 };
@@ -219,13 +233,13 @@ view.setActive = function (id, active) {
 };
 view.readURL = function (input, place_img) {
   if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-          place_img.attr('src', event.target.result)
-      }
-      reader.readAsDataURL(input.files[0]);
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      place_img.attr("src", event.target.result);
+    };
+    reader.readAsDataURL(input.files[0]);
   }
-}
+};
 view.locationTime = function () {
   let now = new Date();
   let h = now.getHours();
@@ -239,6 +253,8 @@ view.locationTime = function () {
   }
   m = checkTime(m);
   s = checkTime(s);
-  document.getElementById("location-time").innerHTML = `${h}:${m}:${s}`;
+  document.getElementById("location-time").innerHTML = `${h}:${m}:${s} ${
+    h > 12 ? "PM" : "AM"
+  }`;
   setTimeout(view.locationTime, 500);
 };

@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Document</title>
-    <link href="style/main.css" rel="stylesheet">
+    <link href="style/main.css" rel="stylesheet" />
     <link type="text/css" rel="stylesheet" href="style/style.css" />
     <link rel="icon" type="image/png" href="asset/favicon.png" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -22,24 +24,28 @@
     <!-- <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script> -->
     <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css"
+    />
 
     <script>
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
-          apiKey: "AIzaSyDKNObltdnxySGbUaqSjyNJTAwEB2N02N4",
-          authDomain: "gamethvl.firebaseapp.com",
-          databaseURL: "https://gamethvl.firebaseio.com",
-          projectId: "gamethvl",
-          storageBucket: "gamethvl.appspot.com",
-          messagingSenderId: "277560623541",
-          appId: "1:277560623541:web:a17f9a16be848c2da999fc",
-          measurementId: "G-ZJL8RGGQC0"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        firebase.analytics();
-      </script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyDKNObltdnxySGbUaqSjyNJTAwEB2N02N4",
+        authDomain: "gamethvl.firebaseapp.com",
+        databaseURL: "https://gamethvl.firebaseio.com",
+        projectId: "gamethvl",
+        storageBucket: "gamethvl.appspot.com",
+        messagingSenderId: "277560623541",
+        appId: "1:277560623541:web:a17f9a16be848c2da999fc",
+        measurementId: "G-ZJL8RGGQC0",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
 
     <script src="./js/components.js"></script>
     <script src="./js/model.js"></script>
@@ -47,79 +53,15 @@
     <script src="./js/controller.js"></script>
     <script src="./js/until.js"></script>
     <script src="./js/main.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="section-content">
-        <div id="">
-            <div id="sidenav" class="sidenav d-flex-col">
-                <form id="user-update" class="d-flex-col d-flex">
-                    <div class="change-img round-box">
-                        <input type="file" class="round-box">
-                        <img src="asset/man-avatar.png" class="round-box">
-                    </div>
-                    <div class="row-input">
-                        <input id="user-name" type="text">
-                        <label for="user-name">Name</label>
-                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                    </div>
-                    <button>Update my detail</button>
-                </form>
-                <div class="d-flex-col d-flex">
-                    <button>My score</button>
-                    <button>History</button>
-                    <form id="btnLogout">
-                        <button>Logout</button>
-                    </form>
-                </div>
-            </div>
-            <header class="nav-bar d-flex">
-                <div class="nav-user">
-                    <a onclick="userDetail()" id="user-detail">
-                        <figure>
-                            <img src="asset/man-avatar.png" class="round-box">
-                        </figure>
-                        <p>Hello<span id="user-name">Bach</span></p>
-                    </a>
-                </div>
-                <div class="">
-                    <h2>Solo game</h2>
-                </div>
-                <div class="">
-                    <div>
+      
 
-                    </div>
-                </div>
-            </header>
-            <div class="main">
-                <div class="grid-content"></div>
-                <div class="score-table">
-                    <div>
 
-                    </div>
-                    <div>
-                        <div>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div id="friends">
-                    <h3>Online <span></span></h3>
-                    <div>
-                        <div class="">
-                            <img src="asset/man-avatar.png" class="round-box">
-                            <p>user 1</p>
-                        </div>
-                        <div>
-                            <img src="asset/man-avatar.png">
-                            <p>user 2</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
-    <canvas id=c></canvas>
-</body>
-
+    <canvas id="c"></canvas>
+  </body>
 </html>

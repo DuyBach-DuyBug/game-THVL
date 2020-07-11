@@ -55,17 +55,26 @@ function readURL(input, place_img) {
       reader.readAsDataURL(input.files[0]);
   }
 }
-// window.onclick = function (e) {
-//   if (document.body.classList.contains('show-user-detail')) {
-//     if (!document.getElementById('sidenav').contains(e.target)) {
-//       console.log('ad')
-//       document.body.classList.remove('show-user-detail')
-//     } else{
-//       console.log('123')
-//     }
-//   }
-// }
+function outNavbar(e) {
+  if (document.body.classList.contains('show-user-detail')) {
+    if (! document.getElementById('sidenav').contains(e.target)) {
+      document.body.classList.remove('show-user-detail')
+    }
+  }
+}
 
 function userDetail() {
   document.body.classList.add('show-user-detail')
+}
+function openTab(e, tabId){
+  let tab = document.querySelectorAll('.tab button')
+  for(let i = 0; i < tab.length; i++){
+    tab[i].classList.remove('active')
+  }
+  e.classList.add('active')
+  let content = document.querySelectorAll('.tabcontent')
+  for(let i = 0; i < content.length; i++){
+    content[i].classList.remove('active')
+  }
+  document.getElementById(tabId).classList.add('active')
 }

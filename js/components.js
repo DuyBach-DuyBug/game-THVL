@@ -5,10 +5,15 @@ components.log = `      <div class="container">
       <h1>Create Account</h1>
       <span>Use your email for registration</span>
       <input name="name" type="text" placeholder="Name" />
+      <div class="message-error" id="name-error"></div>
       <input name="email" type="email" placeholder="Email" />
+      <div class="message-error" id="email-error"></div>
       <input name="password" type="password" placeholder="Password" />
+      <div class="message-error" id="password-error"></div>
       <input name="passwordConfirmation" type="password" placeholder="Password" />
-      <button>Sign Up</button>
+      <div class="message-error" id="password-confirmation-error"></div>
+      <button id="registerBtn">Sign Up</button>
+      <div class="message" id="signUp_message"></div>
   </form>
 </div>
 <div class="form-container sign-in-container">
@@ -16,9 +21,11 @@ components.log = `      <div class="container">
       <h1>Sign in</h1>
       <span>Use your account</span>
       <input name="email" type="email" placeholder="Email" />
+      <div class="message-error" id="email-error"></div>
       <input name="password" type="password" placeholder="Password" />
+      <div class="message-error" id="password-error"></div>
       <a href="#">Forgot your password?</a>
-      <button>Sign In</button>
+      <button id="loginBtn">Sign In</button>
   </form>
 </div>
 <div class="overlay-container">
@@ -36,14 +43,14 @@ components.log = `      <div class="container">
   </div>
 </div>
 </div>`;
-components.menuGame =`<div id="sidenav" class="sidenav d-flex-col d-flex flex-spacebetween">
+components.menuGame = `<div id="sidenav" class="sidenav d-flex-col d-flex flex-spacebetween">
 <form id="user-update" class="d-flex-col d-flex">
   <div class="change-img round-box">
-    <input type="file" class="round-box" />
-    <img src="asset/man-avatar.png" class="round-box" />
+    <input name="image" id="user-avatar" type="file" class="round-box" />
+    <img src="asset/man-avatar.png" class="round-box userAvatar" />
   </div>
   <div class="row-input">
-    <input id="user-name" type="text" maxlength="16" />
+    <input name="name" id="user-name" type="text" maxlength="16" />
     <label for="user-name">Name</label>
     <span class="focus-border"><span></span></span>
     <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -53,17 +60,18 @@ components.menuGame =`<div id="sidenav" class="sidenav d-flex-col d-flex flex-sp
 <div class="d-flex-col d-flex">
   <a class="row-input btn-neon"><span></span><span></span>My score</a>
   <a class="row-input btn-neon"><span></span><span></span>History</a>
+  <a class="row-input btn-neon"><span></span><span></span>Friends</a>
 </div>
-<a class="row-input btn-neon"><span></span><span></span>Logout</a>
+<a class="row-input btn-neon" id="btnLogout"><span></span><span></span>Logout</a>
 <a id="exitSidenav" class="close-btn"></a>
 </div>
 <header class="nav-bar d-flex">
 <div class="nav-user d-flex">
   <a onclick="userDetail()" id="user-detail">
     <figure>
-      <img src="asset/man-avatar.png" class="round-box small-img" />
+      <img src="asset/man-avatar.png" class="round-box small-img userAvatar" />
     </figure>
-    <p>Hello <span id="user-name">Bach</span></p>
+    <p>Hello <span id="display-name"></span></p>
   </a>
 </div>
 <div class="d-flex flex-center">
@@ -141,73 +149,13 @@ components.menuGame =`<div id="sidenav" class="sidenav d-flex-col d-flex flex-sp
       <button onclick="openTab(this, 'tabShip')">Ship</button>
     </div>
     <div id="tabXo" class="tabcontent active">
-      <div class="score-user d-flex" data-score="user-1">
-        <span>1</span>
-        <p>user 4</p>
-        <div class="info-point">
-          <span>1230</span>
-          <span>50%</span>
-        </div>
-      </div>
-      <div class="score-user" data-score="user-2">
-        <span>2</span>
-        <p>user 2</p>
-        <div>
-          <span>1210</span>
-          <span>40%</span>
-        </div>
-      </div>
-      <div class="score-user" data-score="user-3">
-        <span>2</span>
-        <p>user 2</p>
-        <div>
-          <span>1210</span>
-          <span>40%</span>
-        </div>
-      </div>
-      <div class="my-score">
-        <span>2</span>
-        <p>user 2</p>
-        <div>
-          <span>1210</span>
-          <span>40%</span>
-        </div>
-      </div>
+    <div id="scoreboard_xo"></div>
+    <div id="myScoreboard_xo"></div>    
     </div>
     <div id="tabShip" class="tabcontent">
-      <div class="score-user" data-score="user-1">
-        <span>1</span>
-        <p>useasd asr 4</p>
-        <div>
-          <span>1230</span>
-          <span>50%</span>
-        </div>
-      </div>
-      <div class="score-user" data-score="user-2">
-        <span>2</span>
-        <p>usea sd asr 2</p>
-        <div>
-          <span>1210</span>
-          <span>40%</span>
-        </div>
-      </div>
-      <div class="score-user" data-score="user-3">
-        <span>2</span>
-        <p>use asd asr 2</p>
-        <div>
-          <span>1210</span>
-          <span>40%</span>
-        </div>
-      </div>
-      <div class="my-score">
-        <span>2</span>
-        <p>user 2</p>
-        <div>
-          <span>1210</span>
-          <span>40%</span>
-        </div>
-      </div>
-    </div>
+    <div id="scoreboard_ship"></div>
+    <div id="myScoreboard_ship"></div>
+  </div>
   </div>
   <div id="friends" class="border-curved">
     <h3>Online <span id="count-friend">4</span></h3>
@@ -233,3 +181,7 @@ components.menuGame =`<div id="sidenav" class="sidenav d-flex-col d-flex flex-sp
 </div>
 </div>
 <div id="modal" class="modal"></div>`;
+components.gameShip = ``;
+let modal = {};
+modal.friend = ``;
+modal.score = ``;

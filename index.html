@@ -45,6 +45,11 @@
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
       firebase.analytics();
+      const database = firebase.database();
+      const db = firebase.firestore();
+      const auth = firebase.auth();
+      const storage = firebase.storage();
+      const timeSever = firebase.firestore.FieldValue.serverTimestamp();
     </script>
 
     <script src="./js/components.js"></script>
@@ -56,12 +61,7 @@
   </head>
 
   <body>
-    <div id="section-content">
-      
-
-
-
-    </div>
+    <div id="section-content"></div>
     <canvas id="c"></canvas>
   </body>
 </html>

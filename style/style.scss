@@ -234,6 +234,8 @@ button {
   max-height: 50px;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .change-img {
@@ -260,6 +262,7 @@ button {
     max-height: 100%;
     object-fit: cover;
     object-position: center;
+    width: 100%;
   }
 }
 
@@ -351,6 +354,17 @@ button {
         0 0 3px rgba(84, 248, 55, 0.6),
         0 0 5px rgba(84, 248, 55, 0.4);
     }
+  }
+
+  &.has-content {
+    outline: none;
+
+    label {
+      left: 50%;
+      bottom: 50%;
+      transform: translate(-50%, -50%);
+    }
+
   }
 
   input:focus {
@@ -491,6 +505,7 @@ button {
   transition: $transition-30;
   text-align: center;
   cursor: pointer;
+  white-space: nowrap;
 
   span {
     position: absolute;
@@ -603,29 +618,104 @@ button {
     color: $color-orange;
   }
 }
-.score-table{
-  .tab button{
+
+.score-table {
+  .tab button {
     width: 50%;
     background: transparent;
     border: none;
     border-bottom: 1px solid $color-green;
-    &:focus{
+
+    &:focus {
       outline: none;
     }
-    &.active{
+
+    &.active {
       background-color: $color-green;
       color: $color-black;
     }
   }
 }
+
 .tabcontent {
   display: none;
 
   &.active {
     display: block;
   }
-  .info-point{
 
+  .info-point {
+    span:nth-child(2) {
+      display: none;
+    }
+
+    &:hover {
+      span:nth-child(1) {
+        display: none;
+      }
+
+      span:nth-child(2) {
+        display: block;
+      }
+    }
+  }
+
+  .score-user {
+    justify-content: space-between;
+
+    &>span {
+      max-width: 15px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    p {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      width: 100%;
+      padding-left: 10px;
+    }
+
+    .info-point {
+      max-width: 30%;
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+  .number-1,
+  .number-2,
+  .number-3 {
+    &>span:before {
+      content: "\f005";
+      font-family: FontAwesome;
+      position: absolute;
+      font-size: 20px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -42%);
+      z-index: -1;
+    }
+  }
+
+  .number-1>span::before {
+    color: gold;
+  }
+
+  .number-2>span::before {
+    color: silver;
+  }
+
+  .number-3>span::before {
+    color: #cd7f32;
+  }
+
+  .my-score {
+    border-top: 1px solid;
+    margin-top: 15px;
   }
 }
 

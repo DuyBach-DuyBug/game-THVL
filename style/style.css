@@ -244,6 +244,10 @@ button {
   max-height: 50px;
   width: 100%;
   height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
 }
 
 .change-img {
@@ -273,6 +277,7 @@ button {
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
+  width: 100%;
 }
 
 .row-input {
@@ -355,6 +360,17 @@ button {
 .row-input input:hover ~ label,
 .row-input input:hover ~ i {
   text-shadow: 0 0 1px rgba(84, 248, 55, 0.8), 0 0 3px rgba(84, 248, 55, 0.6), 0 0 5px rgba(84, 248, 55, 0.4);
+}
+
+.row-input.has-content {
+  outline: none;
+}
+
+.row-input.has-content label {
+  left: 50%;
+  bottom: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 .row-input input:focus {
@@ -475,6 +491,7 @@ button {
   transition: 0.3s;
   text-align: center;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .btn-neon span {
@@ -610,6 +627,77 @@ button {
 
 .tabcontent.active {
   display: block;
+}
+
+.tabcontent .info-point span:nth-child(2) {
+  display: none;
+}
+
+.tabcontent .info-point:hover span:nth-child(1) {
+  display: none;
+}
+
+.tabcontent .info-point:hover span:nth-child(2) {
+  display: block;
+}
+
+.tabcontent .score-user {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.tabcontent .score-user > span {
+  max-width: 15px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.tabcontent .score-user p {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  padding-left: 10px;
+}
+
+.tabcontent .score-user .info-point {
+  max-width: 30%;
+  text-align: center;
+  width: 100%;
+}
+
+.tabcontent .number-1 > span:before,
+.tabcontent .number-2 > span:before,
+.tabcontent .number-3 > span:before {
+  content: "\f005";
+  font-family: FontAwesome;
+  position: absolute;
+  font-size: 20px;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -42%);
+          transform: translate(-50%, -42%);
+  z-index: -1;
+}
+
+.tabcontent .number-1 > span::before {
+  color: gold;
+}
+
+.tabcontent .number-2 > span::before {
+  color: silver;
+}
+
+.tabcontent .number-3 > span::before {
+  color: #cd7f32;
+}
+
+.tabcontent .my-score {
+  border-top: 1px solid;
+  margin-top: 15px;
 }
 
 #location-time {

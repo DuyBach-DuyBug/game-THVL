@@ -142,37 +142,11 @@ view.showScreen = async function (screenName) {
       signInButton.addEventListener("click", () => {
         container.classList.remove("right-panel-active");
       });
-      let formSignIn = document.getElementById("loginForm");
-      formSignIn.onsubmit = function (event) {
-        debugger
-        event.preventDefault();
-        let email = formSignIn.email.value;
-        let password = formSignIn.password.value;
-        let validate = [
-          view.validate(email != "", "email-error", "Input your email"),
-          view.validate(password != "", "password-error", "Input password"),
-        ];
-        if (!isPass(validate)) {
-          controller.signIn(email, password);
-        }
-      };
-      break;
 
-    case "signUp":
-      // hiển thị giao diện của sign up
-      content.innerHTML = components.signUp;
-
-      // thêm sự kiện click cho sign-in-link --> giao diện sign in
-      let signInLink = document.getElementById("sign-up-link");
-      signInLink.onclick = function () {
-        view.showScreen("signIn");
-      };
-
-      // xử lý form-sign-up
       let formSignUp = document.getElementById("registerForm");
       formSignUp.onsubmit = async function (event) {
         event.preventDefault();
-        view.setActive("btn", true);
+        view.setActive("registerBtn", true);
         // lấy dữ liệu từ form
         let name = formSignUp.name.value;
         let email = formSignUp.email.value;
@@ -196,18 +170,72 @@ view.showScreen = async function (screenName) {
 
         // await view.setActive('btn', false)
       };
-
+      let formSignIn = document.getElementById("loginForm");
+      formSignIn.onsubmit = function (event) {
+        event.preventDefault();
+        let email = formSignIn.email.value;
+        let password = formSignIn.password.value;
+        let validate = [
+          view.validate(email != "", "email-error", "Input your email"),
+          view.validate(password != "", "password-error", "Input password"),
+        ];
+        if (!isPass(validate)) {
+          controller.signIn(email, password);
+        }
+      };
       break;
+
+    // case "signUp":
+    //   // hiển thị giao diện của sign up
+    //   content.innerHTML = components.signUp;
+
+    //   // thêm sự kiện click cho sign-in-link --> giao diện sign in
+    //   let signInLink = document.getElementById("sign-up-link");
+    //   signInLink.onclick = function () {
+    //     view.showScreen("signIn");
+    //   };
+
+    //   // xử lý form-sign-up
+
+    //   break;
     case "menuGame":
       content.innerHTML = components.menuGame;
-      await controller.loadConverstations();
-      document.getElementById("btnLogout").onsubmit = function (e) {
+
+      view.userShow();
+      view.locationTime();
+      controller.scoreboard("xo");
+      controller.scoreboard("ship");
+
+      document.getElementById("user-avatar").onchange = function (e) {
+        readURL(e.target, e.target.nextElementSibling);
+      };
+
+      document.getElementById("user-name").onkeyup = function (e) {
+        let dom = e.target;
+        if (dom.value.length > 0) {
+          dom.parentElement.classList.add("has-content");
+        } else {
+          dom.parentElement.classList.remove("has-content");
+        }
+      };
+
+      document.getElementById("btnLogout").onclick = function (e) {
         e.preventDefault();
         controller.signOut();
       };
+
       document.getElementById("exitSidenav").onclick = function () {
         document.body.classList.remove("show-user-detail");
       };
+
+      let formUpdate = document.getElementById("user-update");
+      formUpdate.onsubmit = function (e) {
+        e.preventDefault();
+        let avatar = formUpdate.image.files[0];
+        let name = formUpdate.name.value;
+        controller.updateUser(avatar, name);
+      };
+      
       break;
   }
 };
@@ -231,15 +259,41 @@ view.setText = function (id, content) {
 view.setActive = function (id, active) {
   document.getElementById(id).disabled = active;
 };
-view.readURL = function (input, place_img) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    reader.onload = function (e) {
-      place_img.attr("src", event.target.result);
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
+
+view.userShow = function () {
+  let user = auth.currentUser;
+  db.collection("user")
+    .doc(user.uid)
+    .onSnapshot(function (doc) {
+      console.log("Current data: ", doc.data());
+      let userData = doc.data();
+      // name
+      document.getElementById("display-name").innerHTML = userData.userName;
+      document.getElementById("user-name").value = userData.userName;
+      document
+        .getElementById("user-name")
+        .parentElement.classList.add("has-content");
+      // image
+      if (userData.avatarUrl) {
+        let userAvatar = document.querySelectorAll(".userAvatar");
+        for (let i = 0; i < userAvatar.length; i++) {
+          userAvatar[i].src = userData.avatarUrl;
+        }
+      }
+      // score XO
+      // for (let game in userData.score) {
+      //   let gameData = userData.score[game]
+      //   // console.log(gameData);
+      //   // for(let point of game){
+      //   //   console.log(point);
+      //     document.getElementById("myName_" + game).innerHTML = userData.userName;
+      //     document.getElementById("myScore_" + game).innerHTML = gameData.elo;
+      //     document.getElementById("myWinrate_" + game).innerHTML = `${gameData.battle > 0 ? gameData.win / gameData.battle * 100 : 0} %`;
+      //   // }
+      // }
+    });
 };
+
 view.locationTime = function () {
   let now = new Date();
   let h = now.getHours();

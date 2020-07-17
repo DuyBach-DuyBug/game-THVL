@@ -58,9 +58,9 @@ components.menuGame = `<div id="sidenav" class="sidenav d-flex-col d-flex flex-s
   <button class="row-input">Update my detail</button>
 </form>
 <div class="d-flex-col d-flex">
-  <a class="row-input btn-neon"><span></span><span></span>My score</a>
-  <a class="row-input btn-neon"><span></span><span></span>History</a>
-  <a class="row-input btn-neon"><span></span><span></span>Friends</a>
+  <div data-typeFunction="btnScore" class="btnFunction row-input btn-neon"><span></span><span></span>My score</div>
+  <div data-typeFunction="btnHistory" class="btnFunction row-input btn-neon"><span></span><span></span>History</div>
+  <div data-typeFunction="btnFriends" class="btnFunction row-input btn-neon"><span></span><span></span>Friends</div>
 </div>
 <a class="row-input btn-neon" id="btnLogout"><span></span><span></span>Logout</a>
 <a id="exitSidenav" class="close-btn"></a>
@@ -82,7 +82,7 @@ components.menuGame = `<div id="sidenav" class="sidenav d-flex-col d-flex flex-s
 </div>
 </header>
 <div onclick="outNavbar(this)" class="main d-flex">
-<div class="grid-content border-curved d-flex">
+<div class="grid-content border-solid border-curved d-flex">
   <div class="game-box border-curved col-100 d-flex">
     <div class="col-40">
       <div
@@ -141,7 +141,7 @@ components.menuGame = `<div id="sidenav" class="sidenav d-flex-col d-flex flex-s
   </div>
 </div>
 <div class="right-content col-20 d-flex d-flex-col">
-  <div class="score-table border-curved">
+  <div class="score-table border-curved border-solid">
     <div class="tab d-flex">
       <button class="active" onclick="openTab(this, 'tabXo')">
         XO
@@ -157,31 +157,39 @@ components.menuGame = `<div id="sidenav" class="sidenav d-flex-col d-flex flex-s
     <div id="myScoreboard_ship"></div>
   </div>
   </div>
-  <div id="friends" class="border-curved">
-    <h3>Online <span id="count-friend">4</span></h3>
-    <div id="list-friends" class="block-friends">
-      <div class="d-flex border-curved">
-        <img src="asset/man-avatar.png" class="round-box small-img" />
-        <p>user 1</p>
-      </div>
-      <div class="d-flex border-curved">
-        <img src="asset/man-avatar.png" class="round-box small-img" />
-        <p>user 2</p>
-      </div>
-      <div class="d-flex border-curved">
-        <img src="asset/man-avatar.png" class="round-box small-img" />
-        <p>user 4</p>
-      </div>
-      <div class="d-flex border-curved">
-        <img src="asset/man-avatar.png" class="round-box small-img" />
-        <p>user 5</p>
-      </div>
+  <div id="friends" class="border-curved border-solid">
+    <h3>Online <span id="count-online">4</span></h3>
+    <div id="list-online" class="block-friends">
     </div>
   </div>
 </div>
 </div>
-<div id="modal" class="modal"></div>`;
+<div id="modal" class="modal border-curved border-solid"></div>`;
 components.gameShip = ``;
 let modal = {};
-modal.friend = ``;
+modal.btnFriends = `<div id="friend_section">
+<h2>Your friends</h2>
+<form id="send-request" class="d-flex">
+  <input
+    name="email"
+    type="email"
+    placeholder="Enter your friend email"
+  />
+  <button>Add</button>
+</form>
+<p id="error-friendRe" class="error-message" style="opacity:0;"></p>
+<div class="container-friend">
+  <h4>Friend requests</h4>
+  <div id="friend-request" class="d-flex border-solid border-curved">
+  </div>
+  <h4>Your friends</h4>
+  <div id="my-friend" class="d-flex border-solid border-curved">
+    <div class="d-flex flex-spacebetween border-solid border-curved">
+      <img class="round-box small-img" src="asset/woman-avatar.png" />
+      <p>asdasd</p>
+      <span class="status round-box online"></span>
+    </div>
+  </div>
+</div>
+</div>`;
 modal.score = ``;

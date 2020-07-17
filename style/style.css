@@ -70,6 +70,10 @@ body,
   border-radius: 10px;
 }
 
+.border-solid {
+  border: 1px solid #008000;
+}
+
 .bg-op-50 {
   opacity: 0.5;
 }
@@ -244,6 +248,7 @@ button {
   max-height: 50px;
   width: 100%;
   height: 100%;
+  height: 50px;
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: center;
@@ -396,7 +401,6 @@ button {
   margin: 0 auto;
   background-color: rgba(0, 0, 0, 0.8);
   padding: 15px;
-  border: 1px solid #008000;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
@@ -420,7 +424,6 @@ button {
 .grid-content .game-box {
   -webkit-box-shadow: 0 0 5px rgba(84, 248, 55, 0.8), 0 0 10px rgba(84, 248, 55, 0.6), 0 0 15px rgba(84, 248, 55, 0.4), 0 0 20px rgba(84, 248, 55, 0.2);
           box-shadow: 0 0 5px rgba(84, 248, 55, 0.8), 0 0 10px rgba(84, 248, 55, 0.6), 0 0 15px rgba(84, 248, 55, 0.4), 0 0 20px rgba(84, 248, 55, 0.2);
-  border-radius: 10px;
   width: 300px;
   height: 300px;
   overflow: hidden;
@@ -468,7 +471,6 @@ button {
 }
 
 .right-content > div {
-  border: 1px solid #008000;
   padding: 15px;
   background-color: rgba(0, 0, 0, 0.8);
 }
@@ -501,6 +503,7 @@ button {
   height: 100%;
   left: 0;
   top: 0;
+  z-index: -1;
 }
 
 .btn-neon span::before, .btn-neon span::after {
@@ -704,6 +707,162 @@ button {
   font-family: 'Clock-Number';
   color: #008000;
   font-size: 40px;
+}
+
+.modal {
+  -webkit-transition-duration: .5s;
+          transition-duration: .5s;
+  opacity: 0;
+  -webkit-transform: translate(-100%, -50%);
+          transform: translate(-100%, -50%);
+  margin: auto;
+  padding: 30px;
+  max-width: 600px;
+  max-height: 800px;
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: #000000;
+}
+
+.modal h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.modal h4 {
+  margin: 10px 0;
+}
+
+.modal #friend_section input {
+  margin-right: 15px;
+  background-color: transparent;
+  position: relative;
+  width: 100%;
+  border: none;
+  height: 30px;
+  font-size: 22px;
+  line-height: 30px;
+  color: #008000;
+  padding: 5px;
+  border-bottom: 1px solid;
+}
+
+.modal #friend_section input::-webkit-input-placeholder {
+  color: #008000;
+}
+
+.modal #friend_section input:-ms-input-placeholder {
+  color: #008000;
+}
+
+.modal #friend_section input::-ms-input-placeholder {
+  color: #008000;
+}
+
+.modal #friend_section input::placeholder {
+  color: #008000;
+}
+
+.modal #friend_section button {
+  padding: 0 15px;
+}
+
+.modal #friend_section .container-friend > .d-flex {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.modal #friend_section .container-friend > .d-flex p {
+  padding: 0 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.modal #friend_section .container-friend > .d-flex > .d-flex {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px;
+  width: 48%;
+  margin: 1%;
+}
+
+.modal #friend_section .container-friend > .d-flex .btn-neon {
+  font-size: 12px;
+  padding: 5px;
+  margin: 0 2px;
+  letter-spacing: normal;
+  width: 30px;
+  height: 30px;
+}
+
+.modal #friend_section .container-friend > .d-flex .btn-neon::after {
+  font-family: FontAwesome;
+}
+
+.modal #friend_section .container-friend > .d-flex .yes::after {
+  content: '\f00c';
+}
+
+.modal #friend_section .container-friend > .d-flex .yes:hover {
+  background: #008000;
+  -webkit-box-shadow: 0 0 2px #008000, 0 0 4px #008000, 0 0 8px #008000;
+          box-shadow: 0 0 2px #008000, 0 0 4px #008000, 0 0 8px #008000;
+}
+
+.modal #friend_section .container-friend > .d-flex .no::after {
+  content: '\f00d';
+}
+
+.modal #friend_section .container-friend > .d-flex .no:hover {
+  background: #FF4B2B;
+  -webkit-box-shadow: 0 0 2px #FF4B2B, 0 0 4px #FF4B2B, 0 0 8px #FF4B2B;
+          box-shadow: 0 0 2px #FF4B2B, 0 0 4px #FF4B2B, 0 0 8px #FF4B2B;
+}
+
+.modal #friend_section .container-friend > .d-flex .no span:before,
+.modal #friend_section .container-friend > .d-flex .no span:after {
+  background: -webkit-gradient(linear, left top, right top, from(transparent), to(#FF4B2B));
+  background: linear-gradient(90deg, transparent, #FF4B2B);
+}
+
+.modal #friend_section .status {
+  width: 15px;
+  height: 15px;
+}
+
+.modal #friend_section .online {
+  background-color: #008000;
+}
+
+.modal #friend_section .offline {
+  background-color: #FF4B2B;
+}
+
+.modal #friend_section #friend-request {
+  max-height: 167px;
+  overflow-y: auto;
+}
+
+.modal #friend_section #my-friend {
+  max-height: 405px;
+  overflow-y: auto;
+}
+
+.error-message {
+  color: #FF4B2B;
+  height: 25px;
+  margin: 5px 0;
+}
+
+.show-modal .modal {
+  opacity: 1;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 canvas {

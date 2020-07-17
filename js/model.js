@@ -2,7 +2,10 @@ let model = {
     converstations: [],
     currentConverstation: null,
     [`scoreboard_xo`]: [],
-    [`scoreboard_ship`]: []
+    [`scoreboard_ship`]: [],
+    friendRe:[],
+    friendList:[],
+    currentUser: null
 }
 model.saveConverstations = function (converstations) {
     model.converstations = converstations

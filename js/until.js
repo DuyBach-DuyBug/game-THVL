@@ -94,7 +94,58 @@ function refineMyScore(index, scoreData, position) {
 </div>
 </div>`;
 }
+function refineOnline(arrOnline) {
+  let html = "";
+  for (let data of arrOnline) {
+    html += `<div class="d-flex border-curved">
+      <img src="${
+        data.avatarUrl != null ? data.avatarUrl : "asset/man-avatar.png"
+      }" class="round-box small-img">
+      <p>${data.userName}</p>
+    </div>`;
+  }
+  document.getElementById("list-online").innerHTML = html;
+  document.getElementById("count-online").innerHTML = arrOnline.length;
+}
 
+function friendRequest(model) {
+  let html = "";
+  for (let [index, data] of model.entries()) {
+    // console.log(model[index])
+    html += `<div class="d-flex flex-spacebetween border-solid border-curved">
+  <img class="round-box small-img" src="${
+    data.avatarUrl != null ? data.avatarUrl : "asset/woman-avatar.png"
+  }" />
+  <p>${data.userName}</p>
+  <div class="d-flex">
+    <a onclick="acceptFr('${
+      data.email
+    }')" class="btn-neon yes"><span></span><span></span></a>
+    <a onclick="refuseFr('${
+      data.email
+    }')" class="btn-neon no"><span></span><span></span></a>
+  </div>
+</div>`;
+    document.getElementById("friend-request").innerHTML = html;
+  }
+}
+function acceptFr(e) {
+  console.log(e);
+  db.collection("user")
+    .doc(model.currentUser.id)
+    .update({
+      friends: firebase.firestore.FieldValue.arrayUnion({
+        email: model.currentUser.email,
+        name: model.currentUser.userName,
+        avatar: model.currentUser.avatarUrl,
+      }),
+      friendRequest: firebase.firestore.FieldValue.arrayRemove({
+        email: model.currentUser.email,
+        name: model.currentUser.userName,
+        avatar: model.currentUser.avatarUrl,
+      }),
+    });
+}
 function outNavbar(e) {
   if (document.body.classList.contains("show-user-detail")) {
     if (!document.getElementById("sidenav").contains(e.target)) {

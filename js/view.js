@@ -205,7 +205,7 @@ view.showScreen = async function (screenName) {
       view.locationTime();
       controller.scoreboard("xo");
       controller.scoreboard("ship");
-
+      controller.online()
       document.getElementById("user-avatar").onchange = function (e) {
         readURL(e.target, e.target.nextElementSibling);
       };
@@ -235,7 +235,13 @@ view.showScreen = async function (screenName) {
         let name = formUpdate.name.value;
         controller.updateUser(avatar, name);
       };
-      
+      let btn = document.querySelectorAll('#sidenav .btnFunction')
+      for(let i=0; i< btn.length; i++){
+        btn[i].onclick = function(e){
+          let typeFunction = e.target.dataset.typefunction
+          controller.modal(typeFunction)
+        }
+      }
       break;
   }
 };
@@ -267,6 +273,7 @@ view.userShow = function () {
     .onSnapshot(function (doc) {
       console.log("Current data: ", doc.data());
       let userData = doc.data();
+      model.currentUser = userData
       // name
       document.getElementById("display-name").innerHTML = userData.userName;
       document.getElementById("user-name").value = userData.userName;
@@ -280,17 +287,15 @@ view.userShow = function () {
           userAvatar[i].src = userData.avatarUrl;
         }
       }
-      // score XO
-      // for (let game in userData.score) {
-      //   let gameData = userData.score[game]
-      //   // console.log(gameData);
-      //   // for(let point of game){
-      //   //   console.log(point);
-      //     document.getElementById("myName_" + game).innerHTML = userData.userName;
-      //     document.getElementById("myScore_" + game).innerHTML = gameData.elo;
-      //     document.getElementById("myWinrate_" + game).innerHTML = `${gameData.battle > 0 ? gameData.win / gameData.battle * 100 : 0} %`;
-      //   // }
-      // }
+      // friend request 
+      model.friendRe = userData.friendRequest
+      try{friendRequest(model.friendRe)} catch{}
+      // friend list 
+      model.friendList = userData.friends
+      for(let i of model.friendList){
+        // document.getElementById("my-friend").innerHTML = model.friendList;
+      }
+
     });
 };
 

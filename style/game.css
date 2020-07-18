@@ -160,7 +160,14 @@ button {
 	width: 430px;
 	display: inline-block;
 }
-
+body {
+    margin: 0;
+    overflow: hidden;
+}
+canvas {
+    display: block;
+    background: #eee;
+}
 .grid {
 	position: relative;
 	vertical-align: top;

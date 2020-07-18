@@ -1,7 +1,7 @@
 
 
-
-window.onload = function ()
+let game = {}
+game.brick =  function ()
 {
     const BALL_SPD = 0.5; // starting ball speed as a fraction of screen height per second
     const BALL_SPD_MAX = 2; // max ball speed as a multiple of starting speed
@@ -53,7 +53,9 @@ window.onload = function ()
     }
 
     // set up the game canvas and context
-    var canv = document.createElement("canvas");
+    // var canv = document.createElement("canvas");
+    
+    var canv = document.getElementById("gameBrick");
     document.body.appendChild(canv);
     var ctx = canv.getContext("2d");
 
@@ -226,7 +228,7 @@ window.onload = function ()
         ctx.fillText(TEXT_LEVEL, x3, yLabel, maxWidth3);
         ctx.textAlign = "right";
         ctx.fillText(TEXT_SCORE_HIGH, x4, yLabel, maxWidth4);
-
+        
         // values
         ctx.font = textSize + "px " + TEXT_FONT;
         ctx.textAlign = "left";
@@ -620,8 +622,11 @@ window.onload = function ()
         // check for a high score
         if (score > scoreHigh) {
             scoreHigh = score;
+            model.point = scoreHigh
             localStorage.setItem(KEY_SCORE, scoreHigh);
         }
+        console.log(scoreHigh)
+        // model.point = score
     }
 
     function Ball() {

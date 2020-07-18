@@ -1,67 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Document</title>
-    <link href="style/main.css" rel="stylesheet" />
-    <link type="text/css" rel="stylesheet" href="style/style.css" />
-    <link rel="icon" type="image/png" href="asset/favicon.png" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <title>Document</title>
+  <link href="style/main.css" rel="stylesheet" />
+  <link type="text/css" rel="stylesheet" href="style/style.css" />
+  <link rel="icon" type="image/png" href="asset/favicon.png" />
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <!-- TODO: Add SDKs for Firebase products that you want to use
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
-    <!-- <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script> -->
-    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
-    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css"
-    />
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
+  <!-- <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script> -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 
-    <script>
-      // Your web app's Firebase configuration
-      var firebaseConfig = {
-        apiKey: "AIzaSyDKNObltdnxySGbUaqSjyNJTAwEB2N02N4",
-        authDomain: "gamethvl.firebaseapp.com",
-        databaseURL: "https://gamethvl.firebaseio.com",
-        projectId: "gamethvl",
-        storageBucket: "gamethvl.appspot.com",
-        messagingSenderId: "277560623541",
-        appId: "1:277560623541:web:a17f9a16be848c2da999fc",
-        measurementId: "G-ZJL8RGGQC0",
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-      firebase.analytics();
-      const database = firebase.database();
-      const db = firebase.firestore();
-      const auth = firebase.auth();
-      const storage = firebase.storage();
-      const timeSever = firebase.firestore.FieldValue.serverTimestamp();
-    </script>
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyDKNObltdnxySGbUaqSjyNJTAwEB2N02N4",
+      authDomain: "gamethvl.firebaseapp.com",
+      databaseURL: "https://gamethvl.firebaseio.com",
+      projectId: "gamethvl",
+      storageBucket: "gamethvl.appspot.com",
+      messagingSenderId: "277560623541",
+      appId: "1:277560623541:web:a17f9a16be848c2da999fc",
+      measurementId: "G-ZJL8RGGQC0",
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    const database = firebase.database();
+    const db = firebase.firestore();
+    const auth = firebase.auth();
+    const storage = firebase.storage();
+    const timeSever = firebase.firestore.FieldValue.serverTimestamp();
+  </script>
 
-    <script src="./js/components.js"></script>
-    <script src="./js/model.js"></script>
-    <script src="./js/view.js"></script>
-    <script src="./js/controller.js"></script>
-    <script src="./js/until.js"></script>
-    <script src="./js/main.js"></script>
-  </head>
+  <script src="./js/components.js"></script>
+  <script src="./js/model.js"></script>
+  <script src="./js/view.js"></script>
+  <script src="./js/controller.js"></script>
+  <script src="./js/until.js"></script>
+  <script src="./js/main.js"></script>
+  <script src="./js/game.js"></script>
+</head>
 
-  <body>
-    <div id="section-content"></div>
-    <canvas id="c"></canvas>
-  </body>
+<body>
+  <!-- <div id="">
+    <h1>XO</h1>
+    <div class="d-flex">
+      <div id="myTime" class="time-box d-flex d-flex-col col-20">
+        <div class="singleTime">1</div>
+        <div class="sumTime">1</div>
+      </div>
+      <div  class="col-60 ">
+        <div id="board" class="game-board"></div>
+      </div>
+      <div id="myTime" class="time-box d-flex d-flex-col col-20">
+        <div class="singleTime">1</div>
+        <div class="sumTime">1</div>
+      </div>
+    </div>
+  </div> -->
+  <div id="section-content"></div>
+  <canvas id="c"></canvas>
+</body>
+
 </html>

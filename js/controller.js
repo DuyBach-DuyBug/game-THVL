@@ -1,7 +1,7 @@
 // điều hương view mà model
 let controller = {};
 controller.signUp = async function (name, email, password) {
-  view.setText("signUp_message", "");
+  // view.setText("signUp_message", "");
   try {
     await auth.createUserWithEmailAndPassword(email, password);
     await db.collection("user").doc(auth.currentUser.uid).set({
@@ -11,7 +11,7 @@ controller.signUp = async function (name, email, password) {
       online: true,
       friends: [],
       friendRequest: [],
-      requestBy: [],
+      friendSent: [],
       avatarUrl: null,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
@@ -139,25 +139,18 @@ controller.online = function () {
 };
 
 controller.modal = async function (typeFunction) {
+  let domModal = document.getElementById("modal")
   switch (typeFunction) {
     case "btnFriends":
-      document.getElementById("modal").innerHTML = modal[typeFunction];
-      friendRequest(model.friendRe);
+      domModal.innerHTML = modal[typeFunction];
+      // friendRequest(model.friendRe);
       // document.getElementById("my-friend").innerHTML = model.friendList;
-
-      let listRe = model.currentUser.friendRequest;
-
-      for (let i in listRe) {
-        console.log(listRe[i])
-        await db.collection("user")
-          .where("friendRequest", "array-contains", listRe[i])
-          .onSnapshot(function (querySnapshot) {
-            // let aa = querySnapshot.docs
-            // console.log(aa)
-// debugger
-            await friendRequest(querySnapshot.docs)
-          });
-      }
+      await db.collection("user")
+        .where("friendSent", "array-contains", model.currentUser.email)
+        .onSnapshot(function (querySnapshot) {
+          console.log(querySnapshot)
+          friendRequest(querySnapshot.docs, "friend-request")
+        });
 
       let sent = document.getElementById("send-request");
       let domError = document.getElementById("error-friendRe");
@@ -172,24 +165,160 @@ controller.modal = async function (typeFunction) {
           domError.innerHTML = "Not found email";
         } else {
           console.log(db.collection("user").doc(friend.docs[0].id));
-          // await db
-          //   .collection("user")
-          //   .doc(friend.docs[0].id)
-          //   .update({
-          //     friendRequest: firebase.firestore.FieldValue.arrayUnion(model.currentUser.email),
-          //     requestBy: firebase.firestore.FieldValue.arrayUnion(model.currentUser.email)
-          //   });
-          // domError.innerHTML = "Has been sent";
-          // sent.reset();
+          console.log(email)
+          await db
+            .collection("user")
+            .doc(friend.docs[0].id)
+            .update({
+              friendRequest: firebase.firestore.FieldValue.arrayUnion(model.currentUser.email)
+            });
+          await db
+            .collection("user")
+            .doc(model.currentUser.id)
+            .update({
+              friendSent: firebase.firestore.FieldValue.arrayUnion(email)
+            });
+          domError.innerHTML = "Has been sent";
+          sent.reset();
         }
         domError.style.opacity = "1";
       };
+      break;
 
+    case "btnInvite":
+      domModal.innerHTML = modal[typeFunction];
+      await db.collection("game").where("player2", "==", model.currentUser.email).onSnapshot(async function (snapshot) {
+        for (let i of snapshot.docs) {
+          let data = await db.collection("user").where("email", "==", i.data().player1).get()
+          await friendRequest(data.docs, "friend-invite")
+        }
+        await acceptBtn("friend-invite")
+      })
+      break;
+
+    case "findType":
+      domModal.innerHTML = await modal[typeFunction]
+      let findRank = document.getElementById('findRank')
+      findRank.onclick = function () {
+        controller.modal("findRank")
+        // view.showScreen("gameXo")
+
+        // db.collection("game").doc()
+        //   .onSnapshot(function (doc) {
+        //     console.log("Current data: ", doc.data());
+        //   });
+      }
+      let findCustom = await document.getElementById('findCustom')
+      findCustom.onclick = function () {
+        controller.modal("findCustom")
+      }
+      break;
+
+    case "findRank":
+      domModal.innerHTML = modal[typeFunction]
+      controller.rankGame()
+      document.getElementById('back').onclick = function () {
+        controller.modal("findType")
+      }
+      break;
+
+    case "findCustom":
+      domModal.innerHTML = modal[typeFunction]
+      let form = document.getElementById('findFriend')
+      form.onsubmit = function (e) {
+        e.preventDefault()
+        controller.customGame(form.email.value)
+      }
+      document.getElementById('back').onclick = function () {
+        controller.modal("findType")
+      }
       break;
   }
 
   await document.body.classList.add("show-modal");
+  domModal.innerHTML += await `<a id="exitModal" class="close-btn"></a>`
+  document.getElementById("exitModal").onclick = await function () {
+    domModal.innerHTML = ""
+    document.body.classList.remove("show-modal");
+  }
 };
+
+controller.rankGame = async function () {
+  db.collection("game").where("inRoom", "==", 1).where("player1", ">", model.currentUser.email).where("player1", "<", model.currentUser.email).onSnapshot(async function (querySnapshot) {
+    console.log(querySnapshot.empty)
+    let getElo = await db.collection("scoreboard").doc(model.currentUser.id).get()
+    let myElo = await getElo.data().xo.elo
+
+    if (querySnapshot.empty) {
+      let game = await db.collection("game").doc()
+      await game.set({
+        id: game.id,
+        inRoom: 1,
+        player: [model.currentUser.email],
+        eloFind: myElo,
+        gameName: "XO",
+        turn: null
+      })
+    } else {
+      await db.collection("game").doc(querySnapshot.docs[0].id).update({
+        player2: model.currentUser.email,
+        inRoom: firebase.firestore.FieldValue.increment(1)
+      })
+    }
+    // for (let change of querySnapshot.docChanges()) {
+    //   console.log(change.type, querySnapshot.empty)
+    //   if (change.type === "added") {
+    //     if (!querySnapshot.empty) {
+    //       //   let game = await db.collection("game").doc()
+    //       //   await console.log(game)
+    //       //   let gameID = await game.id
+    //       //   await game.set({
+    //       //     id: gameID,
+    //       //     inRoom: 1,
+    //       //     player1: model.currentUser.email,
+    //       // player2:null,
+    //       //     eloFind: myElo,
+    //       //     gameName: "XO",
+    //       //     turn: null,
+    // type: rank 
+    //       //   })
+    //       // } else {
+    //       await db.collection("game").doc(querySnapshot.docs[0].id).update({
+    //         player2: model.currentUser.email,
+    //         inRoom: firebase.firestore.FieldValue.increment(1)
+    //       })
+    //     }
+    //   }
+    //   if (change.type === "modified") {
+
+    //   }
+    // }
+
+
+  });
+}
+
+controller.customGame = async function (email) {
+  db.collection("game").where("player2", "==", email).onSnapshot(async function (snapshot) {
+    console.log(snapshot.empty)
+    if (snapshot.empty) {
+      let doc = await db.collection("game").doc()
+      doc.set({
+        id: doc.id,
+        player1: model.currentUser.email,
+        player2: email,
+        inRoom: 1,
+        gameName: "XO",
+        gameType: "custom"
+      })
+    } else {
+      document.getElementById('waitting-sent').innerHTML = `watting ${email}`
+      alert("wait your friend")
+    }
+  })
+
+}
+
 controller.createRoom = async function (title, email) {
   // let member = [email, firebase.auth().currentUser.email]
   await firebase

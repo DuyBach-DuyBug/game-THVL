@@ -5,7 +5,9 @@ let model = {
     [`scoreboard_ship`]: [],
     friendRe:[],
     friendList:[],
-    currentUser: null
+    currentUser: null,
+    game: null,
+    point: 0
 }
 model.saveConverstations = function (converstations) {
     model.converstations = converstations

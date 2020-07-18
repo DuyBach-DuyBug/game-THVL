@@ -1,7 +1,7 @@
 html,
 body,
 button {
-  font-family: 'GrenzeGotisch-';
+  font-family: "GrenzeGotisch-";
 }
 
 html,
@@ -100,6 +100,10 @@ button {
           justify-content: space-between;
 }
 
+#section-content {
+  position: relative;
+}
+
 .nav-bar {
   padding: 10px 20px;
   -webkit-box-pack: justify;
@@ -163,7 +167,7 @@ button {
 }
 
 .close-btn::after, .close-btn::before {
-  content: '';
+  content: "";
   display: block;
   height: 4px;
   width: 30px;
@@ -215,7 +219,7 @@ button {
 }
 
 .show-user-detail .main:after {
-  content: '';
+  content: "";
   display: table;
   position: absolute;
   width: 100%;
@@ -237,6 +241,14 @@ button {
       -ms-flex-align: center;
           align-items: center;
   cursor: pointer;
+  position: relative;
+}
+
+.nav-user i {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #ff4b2b;
 }
 
 .nav-user p {
@@ -260,7 +272,7 @@ button {
 }
 
 .change-img::after {
-  content: '';
+  content: "";
   display: block;
   width: 100%;
   padding-bottom: 100%;
@@ -507,7 +519,7 @@ button {
 }
 
 .btn-neon span::before, .btn-neon span::after {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
 }
@@ -593,7 +605,7 @@ button {
 }
 
 .block-friends > div:nth-child(even) {
-  background: #FF4B2B;
+  background: #ff4b2b;
 }
 
 .block-friends > div:nth-child(even) p {
@@ -605,7 +617,7 @@ button {
   max-width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #FF4B2B;
+  color: #ff4b2b;
 }
 
 .score-table .tab button {
@@ -704,14 +716,14 @@ button {
 }
 
 #location-time {
-  font-family: 'Clock-Number';
+  font-family: "Clock-Number";
   color: #008000;
   font-size: 40px;
 }
 
 .modal {
-  -webkit-transition-duration: .5s;
-          transition-duration: .5s;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
   opacity: 0;
   -webkit-transform: translate(-100%, -50%);
           transform: translate(-100%, -50%);
@@ -726,6 +738,7 @@ button {
   left: 50%;
   top: 50%;
   background-color: #000000;
+  visibility: hidden;
 }
 
 .modal h2 {
@@ -777,9 +790,17 @@ button {
 }
 
 .modal #friend_section .container-friend > .d-flex p {
-  padding: 0 10px;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.modal #friend_section .container-friend > .d-flex .detail {
+  overflow: hidden;
+  padding: 0 10px;
+}
+
+.modal #friend_section .container-friend > .d-flex .name {
+  font-size: 18px;
 }
 
 .modal #friend_section .container-friend > .d-flex > .d-flex {
@@ -805,7 +826,7 @@ button {
 }
 
 .modal #friend_section .container-friend > .d-flex .yes::after {
-  content: '\f00c';
+  content: "\f00c";
 }
 
 .modal #friend_section .container-friend > .d-flex .yes:hover {
@@ -815,19 +836,19 @@ button {
 }
 
 .modal #friend_section .container-friend > .d-flex .no::after {
-  content: '\f00d';
+  content: "\f00d";
 }
 
 .modal #friend_section .container-friend > .d-flex .no:hover {
-  background: #FF4B2B;
-  -webkit-box-shadow: 0 0 2px #FF4B2B, 0 0 4px #FF4B2B, 0 0 8px #FF4B2B;
-          box-shadow: 0 0 2px #FF4B2B, 0 0 4px #FF4B2B, 0 0 8px #FF4B2B;
+  background: #ff4b2b;
+  -webkit-box-shadow: 0 0 2px #ff4b2b, 0 0 4px #ff4b2b, 0 0 8px #ff4b2b;
+          box-shadow: 0 0 2px #ff4b2b, 0 0 4px #ff4b2b, 0 0 8px #ff4b2b;
 }
 
 .modal #friend_section .container-friend > .d-flex .no span:before,
 .modal #friend_section .container-friend > .d-flex .no span:after {
-  background: -webkit-gradient(linear, left top, right top, from(transparent), to(#FF4B2B));
-  background: linear-gradient(90deg, transparent, #FF4B2B);
+  background: -webkit-gradient(linear, left top, right top, from(transparent), to(#ff4b2b));
+  background: linear-gradient(90deg, transparent, #ff4b2b);
 }
 
 .modal #friend_section .status {
@@ -840,7 +861,7 @@ button {
 }
 
 .modal #friend_section .offline {
-  background-color: #FF4B2B;
+  background-color: #ff4b2b;
 }
 
 .modal #friend_section #friend-request {
@@ -854,7 +875,7 @@ button {
 }
 
 .error-message {
-  color: #FF4B2B;
+  color: #ff4b2b;
   height: 25px;
   margin: 5px 0;
 }
@@ -863,6 +884,20 @@ button {
   opacity: 1;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+  visibility: visible;
+}
+
+.game-board {
+  margin: auto;
+}
+
+.game-board > div {
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border: 1px solid;
+  display: inline-block;
+  vertical-align: top;
 }
 
 canvas {

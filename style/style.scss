@@ -3,17 +3,17 @@ $font-diablo: "Diablo-style";
 // text color
 $color-green: #008000;
 $color-black: #000000;
-$color-orange: #FF4B2B;
+$color-orange: #ff4b2b;
 // font size
-// time transition 
-$transition-50: .5s;
-$transition-30: .3s;
+// time transition
+$transition-50: 0.5s;
+$transition-30: 0.3s;
 
 html,
 body,
 button {
   // overflow: hidden;
-  font-family: 'GrenzeGotisch-';
+  font-family: "GrenzeGotisch-";
 }
 
 html,
@@ -101,7 +101,9 @@ button {
 .flex-spacebetween {
   justify-content: space-between;
 }
-
+#section-content{
+  position: relative;
+}
 .nav-bar {
   padding: 10px 20px;
   justify-content: space-between;
@@ -109,7 +111,7 @@ button {
   height: 70px;
   background: rgba(0, 0, 0, 0.5);
 
-  &>div {
+  & > div {
     width: 33.33%;
     width: calc(100% / 3);
   }
@@ -156,7 +158,7 @@ button {
 
   &::after,
   &::before {
-    content: '';
+    content: "";
     display: block;
     height: 4px;
     width: 30px;
@@ -205,7 +207,7 @@ button {
     margin-left: 250px;
 
     &:after {
-      content: '';
+      content: "";
       display: table;
       position: absolute;
       width: 100%;
@@ -221,13 +223,19 @@ button {
 }
 
 .nav-user {
-  &>a {
+  & > a {
     display: inline-flex;
     color: $color-green;
     align-items: center;
     cursor: pointer;
+    position: relative;
   }
-
+  i{
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: $color-orange;
+  }
   p {
     padding-left: 15px;
   }
@@ -247,7 +255,7 @@ button {
   position: relative;
 
   &::after {
-    content: '';
+    content: "";
     display: block;
     width: 100%;
     padding-bottom: 100%;
@@ -307,7 +315,6 @@ button {
   }
 
   .focus-border {
-
     &::after,
     &::before {
       content: "";
@@ -328,7 +335,6 @@ button {
     }
 
     span {
-
       &::after,
       &::before {
         content: "";
@@ -351,13 +357,10 @@ button {
   }
 
   input:hover {
-
-    &~label,
-    &~i {
-      text-shadow:
-        0 0 1px rgba(84, 248, 55, 0.8),
-        0 0 3px rgba(84, 248, 55, 0.6),
-        0 0 5px rgba(84, 248, 55, 0.4);
+    & ~ label,
+    & ~ i {
+      text-shadow: 0 0 1px rgba(84, 248, 55, 0.8),
+        0 0 3px rgba(84, 248, 55, 0.6), 0 0 5px rgba(84, 248, 55, 0.4);
     }
   }
 
@@ -369,27 +372,24 @@ button {
       bottom: 50%;
       transform: translate(-50%, -50%);
     }
-
   }
 
   input:focus {
     outline: none;
 
-    &~label {
+    & ~ label {
       left: 50%;
       bottom: 50%;
       transform: translate(-50%, -50%);
     }
 
-    &~.focus-border {
-
+    & ~ .focus-border {
       &::after,
       &::before {
         width: 100%;
       }
 
       span {
-
         &::after,
         &::before {
           height: 100%;
@@ -422,18 +422,15 @@ button {
   }
 
   .game-box {
-    box-shadow:
-      0 0 5px rgba(84, 248, 55, 0.8),
-      0 0 10px rgba(84, 248, 55, 0.6),
-      0 0 15px rgba(84, 248, 55, 0.4),
-      0 0 20px rgba(84, 248, 55, 0.2);
+    box-shadow: 0 0 5px rgba(84, 248, 55, 0.8), 0 0 10px rgba(84, 248, 55, 0.6),
+      0 0 15px rgba(84, 248, 55, 0.4), 0 0 20px rgba(84, 248, 55, 0.2);
     width: 300px;
     height: 300px;
     overflow: hidden;
     margin: 15px;
     position: relative;
 
-    &>div {
+    & > div {
       position: absolute;
       top: 0;
       left: 0;
@@ -460,7 +457,6 @@ button {
       .game-img {
         opacity: 0.5;
       }
-
     }
   }
 }
@@ -471,7 +467,7 @@ button {
   margin-left: 50px;
   justify-content: space-between;
 
-  &>div {
+  & > div {
     padding: 15px;
     background-color: rgba(0, 0, 0, 0.8);
   }
@@ -480,7 +476,8 @@ button {
     margin-bottom: 50px;
   }
 
-  #friends {}
+  #friends {
+  }
 }
 
 .btn-neon {
@@ -509,7 +506,7 @@ button {
 
     &::before,
     &::after {
-      content: '';
+      content: "";
       display: block;
       position: absolute;
     }
@@ -554,7 +551,8 @@ button {
   &:hover {
     color: $color-black;
     background: $color-green;
-    box-shadow: 0 0 8px $color-green, 0 0 16px $color-green, 0 0 32px $color-green;
+    box-shadow: 0 0 8px $color-green, 0 0 16px $color-green,
+      0 0 32px $color-green;
     transition-delay: $transition-30;
 
     span::before,
@@ -587,7 +585,7 @@ button {
 .block-friends {
   max-height: 450px;
 
-  &>div {
+  & > div {
     padding: 2px;
     align-items: center;
     margin-bottom: 5px;
@@ -655,7 +653,7 @@ button {
   .score-user {
     justify-content: space-between;
 
-    &>span {
+    & > span {
       max-width: 15px;
       width: 100%;
       text-align: center;
@@ -681,7 +679,7 @@ button {
   .number-1,
   .number-2,
   .number-3 {
-    &>span:before {
+    & > span:before {
       content: "\f005";
       font-family: FontAwesome;
       position: absolute;
@@ -693,15 +691,15 @@ button {
     }
   }
 
-  .number-1>span::before {
+  .number-1 > span::before {
     color: gold;
   }
 
-  .number-2>span::before {
+  .number-2 > span::before {
     color: silver;
   }
 
-  .number-3>span::before {
+  .number-3 > span::before {
     color: #cd7f32;
   }
 
@@ -712,7 +710,7 @@ button {
 }
 
 #location-time {
-  font-family: 'Clock-Number';
+  font-family: "Clock-Number";
   color: $color-green;
   font-size: 40px;
 }
@@ -733,7 +731,7 @@ button {
 //   visibility: visible;
 // }
 .modal {
-  transition-duration: .5s;
+  transition-duration: 0.5s;
   opacity: 0;
   transform: translate(-100%, -50%);
   margin: auto;
@@ -747,7 +745,7 @@ button {
   left: 50%;
   top: 50%;
   background-color: $color-black;
-
+  visibility: hidden;
   h2 {
     text-align: center;
     margin-bottom: 15px;
@@ -758,7 +756,8 @@ button {
   }
 
   #friend_section {
-    form {}
+    form {
+    }
 
     input {
       margin-right: 15px;
@@ -782,16 +781,21 @@ button {
       padding: 0 15px;
     }
 
-    .container-friend>.d-flex {
+    .container-friend > .d-flex {
       flex-wrap: wrap;
 
       p {
-        padding: 0 10px;
         text-overflow: ellipsis;
         overflow: hidden;
       }
-
-      &>.d-flex {
+      .detail {
+        overflow: hidden;
+        padding: 0 10px;
+      }
+      .name{
+        font-size: 18px;
+      }
+      & > .d-flex {
         align-items: center;
         padding: 10px;
         width: 48%;
@@ -813,23 +817,25 @@ button {
 
       .yes {
         &::after {
-          content: '\f00c';
+          content: "\f00c";
         }
 
         &:hover {
           background: $color-green;
-          box-shadow: 0 0 2px $color-green, 0 0 4px $color-green, 0 0 8px $color-green;
+          box-shadow: 0 0 2px $color-green, 0 0 4px $color-green,
+            0 0 8px $color-green;
         }
       }
 
       .no {
         &::after {
-          content: '\f00d';
+          content: "\f00d";
         }
 
         &:hover {
           background: $color-orange;
-          box-shadow: 0 0 2px $color-orange, 0 0 4px $color-orange, 0 0 8px $color-orange;
+          box-shadow: 0 0 2px $color-orange, 0 0 4px $color-orange,
+            0 0 8px $color-orange;
         }
 
         span:before,
@@ -873,8 +879,19 @@ button {
 .show-modal .modal {
   opacity: 1;
   transform: translate(-50%, -50%);
+  visibility: visible;
 }
-
+.game-board{
+  margin: auto;
+  & > div{
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid;
+    display: inline-block;
+    vertical-align: top;
+  }
+}
 canvas {
   position: absolute;
   top: 0;

@@ -131,22 +131,22 @@ view.showScreen = async function (screenName) {
       // signUpLink.onclick = function () {
       //   view.showScreen("menuGame");
       // };
-      const signUpButton = document.getElementById("signUp");
-      const signInButton = document.getElementById("signIn");
-      const container = document.getElementById("section-content");
+      let signUpButton = document.getElementById("signUp");
+      let signInButton = document.getElementById("signIn");
+      let container = document.getElementById("container");
 
       signUpButton.addEventListener("click", () => {
-        container.classList.add("right-panel-active");
+        document.getElementById("container").classList.add("right-panel-active");
       });
 
       signInButton.addEventListener("click", () => {
-        container.classList.remove("right-panel-active");
+        document.getElementById("container").classList.remove("right-panel-active");
       });
 
-      let formSignUp = document.getElementById("registerForm");
+      let formSignUp = document.getElementById("form-sign-up");
       formSignUp.onsubmit = async function (event) {
         event.preventDefault();
-        view.setActive("registerBtn", true);
+        view.setActive("sign-up-btn", true);
         // lấy dữ liệu từ form
         let name = formSignUp.name.value;
         let email = formSignUp.email.value;
@@ -167,10 +167,8 @@ view.showScreen = async function (screenName) {
         if (!isPass(validate)) {
           await controller.signUp(name, email, password);
         }
-
-        // await view.setActive('btn', false)
       };
-      let formSignIn = document.getElementById("loginForm");
+      let formSignIn = document.getElementById("form-sign-in");
       formSignIn.onsubmit = function (event) {
         event.preventDefault();
         let email = formSignIn.email.value;
@@ -185,19 +183,6 @@ view.showScreen = async function (screenName) {
       };
       break;
 
-    // case "signUp":
-    //   // hiển thị giao diện của sign up
-    //   content.innerHTML = components.signUp;
-
-    //   // thêm sự kiện click cho sign-in-link --> giao diện sign in
-    //   let signInLink = document.getElementById("sign-up-link");
-    //   signInLink.onclick = function () {
-    //     view.showScreen("signIn");
-    //   };
-
-    //   // xử lý form-sign-up
-
-    //   break;
     case "menuGame":
       content.innerHTML = components.menuGame;
 
@@ -235,35 +220,33 @@ view.showScreen = async function (screenName) {
         let name = formUpdate.name.value;
         controller.updateUser(avatar, name);
       };
+
       let btn = document.querySelectorAll('#sidenav .btnFunction')
-      for(let i=0; i< btn.length; i++){
-        btn[i].onclick = function(e){
+      for (let i = 0; i < btn.length; i++) {
+        btn[i].onclick = function (e) {
           let typeFunction = e.target.dataset.typefunction
           controller.modal(typeFunction)
         }
       }
+
+      document.getElementById("play-xo").onclick = function () {
+        controller.modal("findType")
+        // view.showScreen("gameXo");
+      }
+      document.getElementById("play-brick").onclick = function () {
+        controller.modal("findType")
+        view.showScreen("gameBrick");
+        game.brick()
+      }
+      break;
+    case "gameXo":
+      content.innerHTML = components.gameXo;
+      view.createBoard(size)
+      break;
+    case "gameBrick":
+      content.innerHTML = components.gameBrick;
       break;
   }
-};
-
-view.validate = function (condition, errorTag, message) {
-  if (!condition) {
-    // document.getElementById(errorTag).innerHTML = message;
-    view.setText(errorTag, message);
-    return false;
-  } else {
-    // document.getElementById(errorTag).innerHTML = "";
-    view.setText(errorTag, "");
-    return true;
-  }
-};
-
-view.setText = function (id, content) {
-  document.getElementById(id).innerHTML = content;
-};
-
-view.setActive = function (id, active) {
-  document.getElementById(id).disabled = active;
 };
 
 view.userShow = function () {
@@ -287,17 +270,38 @@ view.userShow = function () {
           userAvatar[i].src = userData.avatarUrl;
         }
       }
-      // friend request 
-      model.friendRe = userData.friendRequest
-      try{friendRequest(model.friendRe)} catch{}
+      // notification
+      notification(userData)
       // friend list 
       model.friendList = userData.friends
-      for(let i of model.friendList){
+      for (let i of model.friendList) {
         // document.getElementById("my-friend").innerHTML = model.friendList;
       }
 
     });
 };
+
+view.createBoard = async function (ratio) {
+  let html = ""
+  ratio = 10
+  let arr = []
+  for (let x = 0; x < ratio; x++) {
+    for (let y = 0; y < ratio; y++) {
+      html += `<div data-x="${x}" data-y="${y}" onclick="coordinates(this)">${x},${y}</div>`
+      let toaDo = { x: x, y: y }
+      arr.push(toaDo)
+    }
+  }
+  model.game = await db.collection("game").doc().set({
+    gameMap: arr,
+    turn: 1
+  })
+
+  console.log(model.game)
+  let dom = document.getElementById("board")
+  dom.innerHTML = html
+  dom.style.width = 30 * ratio + "px"
+}
 
 view.locationTime = function () {
   let now = new Date();
@@ -314,6 +318,26 @@ view.locationTime = function () {
   s = checkTime(s);
   document.getElementById("location-time").innerHTML = `${h}:${m}:${s} ${
     h > 12 ? "PM" : "AM"
-  }`;
+    }`;
   setTimeout(view.locationTime, 500);
+};
+
+view.validate = function (condition, errorTag, message) {
+  if (!condition) {
+    // document.getElementById(errorTag).innerHTML = message;
+    view.setText(errorTag, message);
+    return false;
+  } else {
+    // document.getElementById(errorTag).innerHTML = "";
+    view.setText(errorTag, "");
+    return true;
+  }
+};
+
+view.setText = function (id, content) {
+  document.getElementById(id).innerHTML = content;
+};
+
+view.setActive = function (id, active) {
+  document.getElementById(id).disabled = active;
 };

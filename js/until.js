@@ -55,22 +55,32 @@ function readURL(input, place_img) {
   }
 }
 
+function notification(userData) {
+  let sumNotification = 0;
+  // console.log(userData.friendRequest.length)
+  let requestFr = userData.friendRequest
+  if (requestFr.length > 0) {
+    document.getElementById('notification').innerHTML += requestFr.length
+    document.querySelector('.btnFunction[data-typefunction="btnFriends"]')
+  }
+}
+
 function refineScore(arrScore, domID, position) {
   let html = "";
   for (let i = 0; i < 10; i++) {
     if (typeof arrScore[i] != "undefined") {
       html += `<div class="score-user d-flex number-${
         i + 1
-      }" data-score="user-${i}">
+        }" data-score="user-${i}">
   <span>${i + 1}</span>
   <p>${arrScore[i].name}</p>
   <div class="info-point">
     <span>${arrScore[i][position].elo}</span>
     <span>${
-      arrScore[i][position].battle > 0
-        ? (arrScore[i][position].win / arrScore[i][position].battle) * 100
-        : 0
-    }%</span>
+        arrScore[i][position].battle > 0
+          ? (arrScore[i][position].win / arrScore[i][position].battle) * 100
+          : 0
+        }%</span>
   </div>
 </div>`;
     }
@@ -82,7 +92,7 @@ function refineMyScore(index, scoreData, position) {
   document.getElementById(
     "myScoreboard_" + position
   ).innerHTML = `<div class="my-score score-user d-flex ">
-<span>${index < 50 ? index : "..."}</span>
+<span>${index < 50 ? index + 1 : "..."}</span>
 <p id="myName_xo">${scoreData.name}</p>
 <div class="info-point">
   <span id="myScore_xo">${scoreData[position].elo}</span>
@@ -90,7 +100,7 @@ function refineMyScore(index, scoreData, position) {
     scoreData[position].battle > 0
       ? (scoreData[position].win / scoreData[position].battle) * 100
       : 0
-  }%</span>
+    }%</span>
 </div>
 </div>`;
 }
@@ -99,7 +109,7 @@ function refineOnline(arrOnline) {
   for (let data of arrOnline) {
     html += `<div class="d-flex border-curved">
       <img src="${
-        data.avatarUrl != null ? data.avatarUrl : "asset/man-avatar.png"
+      data.avatarUrl != null ? data.avatarUrl : "asset/man-avatar.png"
       }" class="round-box small-img">
       <p>${data.userName}</p>
     </div>`;
@@ -108,44 +118,41 @@ function refineOnline(arrOnline) {
   document.getElementById("count-online").innerHTML = arrOnline.length;
 }
 
-function friendRequest(model) {
+function friendRequest(model, domID) {
   let html = "";
-  for (let [index, data] of model.entries()) {
-    // console.log(model[index])
+  for (let [index, doc] of model.entries()) {
+    let data = doc.data()
+    console.log(data)
+
     html += `<div class="d-flex flex-spacebetween border-solid border-curved">
   <img class="round-box small-img" src="${
-    data.avatarUrl != null ? data.avatarUrl : "asset/woman-avatar.png"
-  }" />
-  <p>${data.userName}</p>
+      data.avatarUrl != null ? data.avatarUrl : "asset/woman-avatar.png"
+      }" />
+  <div class="detail"><p class="name">${data.userName}</p><p>${data.email}</p></div>
   <div class="d-flex">
-    <a onclick="acceptFr('${
-      data.email
-    }')" class="btn-neon yes"><span></span><span></span></a>
-    <a onclick="refuseFr('${
-      data.email
-    }')" class="btn-neon no"><span></span><span></span></a>
+    <a data-id="${data.id}" data-user="${data.email}" class="btn-neon yes"><span></span><span></span></a>
+    <a data-id="${data.id}" data-user="${data.email}" class="btn-neon no"><span></span><span></span></a>
   </div>
 </div>`;
-    document.getElementById("friend-request").innerHTML = html;
+    document.getElementById(domID).innerHTML = html;
   }
 }
-function acceptFr(e) {
-  console.log(e);
-  db.collection("user")
-    .doc(model.currentUser.id)
-    .update({
-      friends: firebase.firestore.FieldValue.arrayUnion({
-        email: model.currentUser.email,
-        name: model.currentUser.userName,
-        avatar: model.currentUser.avatarUrl,
-      }),
-      friendRequest: firebase.firestore.FieldValue.arrayRemove({
-        email: model.currentUser.email,
-        name: model.currentUser.userName,
-        avatar: model.currentUser.avatarUrl,
-      }),
-    });
+
+function acceptBtn(dom) {
+  let btnGroups = document.querySelectorAll(`#${dom} .yes`)
+  for(let i=0; i< btnGroups.length; i++){
+    btnGroups[i].onclick = function (e){
+      let check = e.target
+      let userSent = e.target.dataset.user
+      let sentId = e.target.dataset.id
+      console.log(check, userSent, sentId)
+      if(dom == "friend-invite"){
+        // db.collection("game").where("")
+      }
+    }
+  }
 }
+
 function outNavbar(e) {
   if (document.body.classList.contains("show-user-detail")) {
     if (!document.getElementById("sidenav").contains(e.target)) {
@@ -153,7 +160,11 @@ function outNavbar(e) {
     }
   }
 }
-
+// function findType(dom){
+//   let typeGame = dom.dataset.typegame
+//   console.log(typeGame)
+//   controller.modal(typeGame)
+// }
 function userDetail() {
   document.body.classList.add("show-user-detail");
 }
@@ -168,4 +179,14 @@ function openTab(e, tabId) {
     content[i].classList.remove("active");
   }
   document.getElementById(tabId).classList.add("active");
+}
+
+function coordinates(dom){
+  console.dir(dom)
+  let x = dom.dataset.x
+  let y = dom.dataset.y
+  console.log(x,y)
+  db.collection("game").doc().set({
+
+  })
 }

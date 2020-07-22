@@ -37,6 +37,11 @@ controller.signUp = async function (name, email, password) {
           winStreak: 0,
           loseStreak: 0,
         },
+        brick:{
+          elo: 0,
+          winrate: 0,
+          battle: 0,
+        }
       });
   } catch (error) {
     console.log(error);
@@ -118,6 +123,7 @@ controller.scoreboard = function (position) {
       for (let [index, doc] of snapshot.docs.entries()) {
         let scoreData = doc.data();
         if (doc.id == auth.currentUser.uid) {
+          model.myScore = scoreData
           refineMyScore(index, scoreData, position);
         }
         score.push(scoreData);

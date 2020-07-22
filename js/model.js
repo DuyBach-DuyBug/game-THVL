@@ -3,11 +3,11 @@ let model = {
     currentConverstation: null,
     [`scoreboard_xo`]: [],
     [`scoreboard_ship`]: [],
+    [`scoreboard_brick`]: [],
     friendRe:[],
     friendList:[],
     currentUser: null,
     game: null,
-    point: 0
 }
 model.saveConverstations = function (converstations) {
     model.converstations = converstations

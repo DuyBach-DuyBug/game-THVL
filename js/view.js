@@ -113,9 +113,8 @@ view.effectBackground = function () {
 
 view.showScreen = async function (screenName) {
   /* 
-        signIn --> show giao diện của sign in
-        signUp --> show giao diện của sign up
-        chat --> show giao diện của chat 
+        log --> show giao diện của sign in, sign up
+        menuGame --> show giao diện của menu 
     */
 
   let content = document.getElementById("section-content");
@@ -125,22 +124,16 @@ view.showScreen = async function (screenName) {
       // hiển thị giao diện của sign in
       content.innerHTML = components.log;
 
-      // thêm sự kiện click cho sign-up-link --> giao diện sign up
-
-      // let signUpLink = document.getElementById("sign-in-link");
-      // signUpLink.onclick = function () {
-      //   view.showScreen("menuGame");
-      // };
-      let signUpButton = document.getElementById("signUp");
-      let signInButton = document.getElementById("signIn");
-      let container = document.getElementById("container");
-
-      signUpButton.addEventListener("click", () => {
-        document.getElementById("container").classList.add("right-panel-active");
+      document.getElementById("signUp").addEventListener("click", () => {
+        document
+          .getElementById("container")
+          .classList.add("right-panel-active");
       });
 
-      signInButton.addEventListener("click", () => {
-        document.getElementById("container").classList.remove("right-panel-active");
+      document.getElementById("signIn").addEventListener("click", () => {
+        document
+          .getElementById("container")
+          .classList.remove("right-panel-active");
       });
 
       let formSignUp = document.getElementById("form-sign-up");
@@ -162,8 +155,6 @@ view.showScreen = async function (screenName) {
             "Password confirmation is not match"
           ),
         ];
-        // gửi dữ liệu & lưu trong cơ sở dữ liệu
-        // thư viện firebase
         if (!isPass(validate)) {
           await controller.signUp(name, email, password);
         }
@@ -187,10 +178,11 @@ view.showScreen = async function (screenName) {
       content.innerHTML = components.menuGame;
 
       view.userShow();
-      view.locationTime();
+      view.locationTime("location-time");
       controller.scoreboard("xo");
       controller.scoreboard("ship");
-      controller.online()
+      controller.scoreboard("brick");
+      controller.online();
       document.getElementById("user-avatar").onchange = function (e) {
         readURL(e.target, e.target.nextElementSibling);
       };
@@ -204,8 +196,7 @@ view.showScreen = async function (screenName) {
         }
       };
 
-      document.getElementById("btnLogout").onclick = function (e) {
-        e.preventDefault();
+      document.getElementById("btnLogout").onclick = function () {
         controller.signOut();
       };
 
@@ -221,30 +212,33 @@ view.showScreen = async function (screenName) {
         controller.updateUser(avatar, name);
       };
 
-      let btn = document.querySelectorAll('#sidenav .btnFunction')
+      let btn = document.querySelectorAll("#sidenav .btnFunction");
       for (let i = 0; i < btn.length; i++) {
         btn[i].onclick = function (e) {
-          let typeFunction = e.target.dataset.typefunction
-          controller.modal(typeFunction)
-        }
+          let typeFunction = e.target.dataset.typefunction;
+          controller.modal(typeFunction);
+        };
       }
 
       document.getElementById("play-xo").onclick = function () {
-        controller.modal("findType")
-        // view.showScreen("gameXo");
-      }
+        controller.modal("findType");
+      };
       document.getElementById("play-brick").onclick = function () {
-        controller.modal("findType")
         view.showScreen("gameBrick");
-        game.brick()
-      }
+      };
       break;
+
     case "gameXo":
       content.innerHTML = components.gameXo;
-      view.createBoard(size)
+      view.createBoard(size);
       break;
+
     case "gameBrick":
       content.innerHTML = components.gameBrick;
+      game.brick();
+      document.getElementById('exitGame').onclick = function(){
+        view.showScreen("menuGame");
+      }
       break;
   }
 };
@@ -256,7 +250,7 @@ view.userShow = function () {
     .onSnapshot(function (doc) {
       console.log("Current data: ", doc.data());
       let userData = doc.data();
-      model.currentUser = userData
+      model.currentUser = userData;
       // name
       document.getElementById("display-name").innerHTML = userData.userName;
       document.getElementById("user-name").value = userData.userName;
@@ -271,39 +265,38 @@ view.userShow = function () {
         }
       }
       // notification
-      notification(userData)
-      // friend list 
-      model.friendList = userData.friends
+      notification(userData);
+      // friend list
+      model.friendList = userData.friends;
       for (let i of model.friendList) {
         // document.getElementById("my-friend").innerHTML = model.friendList;
       }
-
     });
 };
 
 view.createBoard = async function (ratio) {
-  let html = ""
-  ratio = 10
-  let arr = []
+  let html = "";
+  ratio = 10;
+  let arr = [];
   for (let x = 0; x < ratio; x++) {
     for (let y = 0; y < ratio; y++) {
-      html += `<div data-x="${x}" data-y="${y}" onclick="coordinates(this)">${x},${y}</div>`
-      let toaDo = { x: x, y: y }
-      arr.push(toaDo)
+      html += `<div data-x="${x}" data-y="${y}" onclick="coordinates(this)">${x},${y}</div>`;
+      let toaDo = { x: x, y: y };
+      arr.push(toaDo);
     }
   }
   model.game = await db.collection("game").doc().set({
     gameMap: arr,
-    turn: 1
-  })
+    turn: 1,
+  });
 
-  console.log(model.game)
-  let dom = document.getElementById("board")
-  dom.innerHTML = html
-  dom.style.width = 30 * ratio + "px"
-}
+  console.log(model.game);
+  let dom = document.getElementById("board");
+  dom.innerHTML = html;
+  dom.style.width = 30 * ratio + "px";
+};
 
-view.locationTime = function () {
+view.locationTime = function (id) {
   let now = new Date();
   let h = now.getHours();
   let m = now.getMinutes();
@@ -316,9 +309,9 @@ view.locationTime = function () {
   }
   m = checkTime(m);
   s = checkTime(s);
-  document.getElementById("location-time").innerHTML = `${h}:${m}:${s} ${
+  document.getElementById(id).innerHTML = `${h}:${m}:${s} ${
     h > 12 ? "PM" : "AM"
-    }`;
+  }`;
   setTimeout(view.locationTime, 500);
 };
 

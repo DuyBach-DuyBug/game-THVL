@@ -97,7 +97,7 @@ components.menuGame = `<div id="sidenav" class="sidenav d-flex-col d-flex flex-s
         "
       ></div>
     </div>
-    <div class="col-60">
+    <div class="col-60 d-flex d-flex-col flex-spacebetween">
       <h4>XO</h4>
       <p>
         What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the
@@ -114,6 +114,7 @@ components.menuGame = `<div id="sidenav" class="sidenav d-flex-col d-flex flex-s
       <button id="play-xo">Play</button>
     </div>
   </div>
+
   <div class="game-box border-curved col-100 d-flex">
     <div class="col-40">
       <div
@@ -123,7 +124,7 @@ components.menuGame = `<div id="sidenav" class="sidenav d-flex-col d-flex flex-s
         "
       ></div>
     </div>
-    <div class="col-60">
+    <div class="col-60 d-flex d-flex-col flex-spacebetween">
       <h4>Brick</h4>
       <p>
         What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the
@@ -133,6 +134,7 @@ components.menuGame = `<div id="sidenav" class="sidenav d-flex-col d-flex flex-s
       <button id="play-brick">Play</button>
     </div>
   </div>
+
   <div class="game-box border-curved col-100 d-flex">
     <div class="col-40">
       <div
@@ -140,25 +142,13 @@ components.menuGame = `<div id="sidenav" class="sidenav d-flex-col d-flex flex-s
         style="background-image: url(asset/unnamed.jpg);"
       ></div>
     </div>
-    <div class="col-60">
+    <div class="col-60 d-flex d-flex-col flex-spacebetween">
       <h4>Battleshit board</h4>
       <p>
         Why do we use it? It is a long established fact that a reader
         will be distracted by the readable content of a page when
         looking at its layout. The point of using Lorem Ipsum is that it
         has a more-or-less normal distribution of letters, as opposed to
-        using 'Content here, content here', making it look like readable
-        English. Many desktop publishing packages and web page editors
-        now use Lorem Ipsum as their default model text, and a search
-        for 'lorem ipsum' will uncover many web sites still in their
-        infancy. Various versions have evolved over the years, sometimes
-        by accident, sometimes on purpose (injected humour and the
-        like). English. Many desktop publishing packages and web page
-        editors now use Lorem Ipsum as their default model text, and a
-        search for 'lorem ipsum' will uncover many web sites still in
-        their infancy. Various versions have evolved over the years,
-        sometimes by accident, sometimes on purpose (injected humour and
-        the like).
       </p>
       <button>Play</button>
     </div>
@@ -194,7 +184,7 @@ components.menuGame = `<div id="sidenav" class="sidenav d-flex-col d-flex flex-s
 </div>
 </div>
 <div id="modal" class="modal border-curved border-solid"></div>`;
-components.gameBrick = `<canvas id="gameBrick"></canvas>`;
+components.gameBrick = `<a id="exitGame" class="btn-neon"><span></span><span></span>Exit</a><canvas id="gameBrick"></canvas>`;
 components.gameXo = `<header class="nav-bar d-flex">
 <div class="nav-user d-flex">
   <a onclick="userDetail()" id="user-detail">

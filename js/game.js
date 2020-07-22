@@ -56,7 +56,7 @@ game.brick =  function ()
     // var canv = document.createElement("canvas");
     
     var canv = document.getElementById("gameBrick");
-    document.body.appendChild(canv);
+    document.getElementById('section-content').appendChild(canv);
     var ctx = canv.getContext("2d");
 
     // set up sound effects
@@ -337,7 +337,10 @@ game.brick =  function ()
         win = false;
 
         // get high score from local storage
-        let scoreStr = localStorage.getItem(KEY_SCORE);
+        // bach 
+        let scoreStr ;
+        scoreStr = model.myScore.brick.elo
+        // = localStorage.getItem(KEY_SCORE);
         if (scoreStr == null) {
             scoreHigh = 0;
         } else {
@@ -359,6 +362,13 @@ game.brick =  function ()
         lives--;
         if (lives == 0) {
             gameOver = true;
+            db.collection("scoreboard").doc(model.currentUser.id).update({
+                brick: {
+                    elo: scoreHigh,
+                    battle: 0,
+                    winrate: 0
+                }
+            })
         }
         newBall();
     }
@@ -622,11 +632,8 @@ game.brick =  function ()
         // check for a high score
         if (score > scoreHigh) {
             scoreHigh = score;
-            model.point = scoreHigh
-            localStorage.setItem(KEY_SCORE, scoreHigh);
+            // localStorage.setItem(KEY_SCORE, scoreHigh);
         }
-        console.log(scoreHigh)
-        // model.point = score
     }
 
     function Ball() {

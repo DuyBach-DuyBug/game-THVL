@@ -704,7 +704,10 @@ game.brick = function () {
 game.ship = function () {
   db.collection("game")
     .doc("qxWJQIWjIKGGYkMSymLL")
-    .onSnapshot(async function (onSnapshot) {
-      console.log(onSnapshot);
+    .onSnapshot(async function (doc) {
+      console.log(doc.data());
+      for(let data of onSnapshot.data()){
+          console.log(data)
+      }
     });
 };

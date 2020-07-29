@@ -191,6 +191,8 @@ controller.modal = async function (typeFunction) {
           .get();
         if (friend.empty == true) {
           domError.innerHTML = "Not found email";
+        } else if(friend.empty == false && model.currentUser.friends.indexOf(email) >= 0){
+          domError.innerHTML = "Was friend";
         } else {
           console.log(db.collection("user").doc(friend.docs[0].id));
           console.log(email);

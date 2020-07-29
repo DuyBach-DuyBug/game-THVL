@@ -104,10 +104,6 @@ button {
   position: relative;
 }
 
-.disable-click {
-  pointer-events: none;
-}
-
 .nav-bar {
   padding: 10px 20px;
   -webkit-box-pack: justify;
@@ -1011,6 +1007,63 @@ canvas#gameBrick {
 
 .view-gameBrick h3 {
   padding: 0 20px;
+}
+
+.gameShip-section {
+  width: 100%;
+}
+
+.gameShip-section .hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.gameShip-section .table-ship {
+  width: 150px;
+}
+
+.gameShip-section .table-ship .select {
+  color: red;
+}
+
+.gameShip-section .col-50 {
+  padding: 30px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.gameShip-section .map-box {
+  position: relative;
+  vertical-align: top;
+  padding: 5px;
+  height: 430px;
+  width: 430px;
+  background-color: #25567B;
+  border-radius: 5px;
+}
+
+.gameShip-section .box {
+  vertical-align: top;
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+  background-color: #99C2E1;
+  margin: 1px;
+  border-radius: 2px;
+}
+
+.gameShip-section .ship {
+  background-color: green;
+}
+
+.gameShip-section .disable-box {
+  pointer-events: none;
+}
+
+.gameShip-section .rote {
+  color: green;
 }
 
 @-webkit-keyframes spin {

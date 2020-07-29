@@ -106,7 +106,7 @@ button {
   position: relative;
 }
 .disable-click{
-  pointer-events: none;
+  // pointer-events: none;
 }
 .nav-bar {
   padding: 10px 20px;
@@ -1010,7 +1010,55 @@ canvas#c {}
     padding: 0 20px;
   }
 }
-
+.gameShip-section{
+  width: 100%;
+  .hidden{
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .table-ship{
+    width: 150px;
+    .select{
+      color: red;
+    }
+  }
+  .col-50{
+    padding: 30px;
+    justify-content: space-between;
+  }
+  .map-box{
+    position: relative;
+    vertical-align: top;
+    padding: 5px;
+    height: 430px;
+    width: 430px;
+    background-color: #25567B;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+  .box{
+    vertical-align: top;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    background-color: #99C2E1;
+    margin: 1px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+  }
+  .ship{
+    background-color: green;
+  }
+  .disable-box{
+    pointer-events: none;
+  }
+  .rote{
+    color: green;
+  }
+}
 @-webkit-keyframes spin {
   0%   {
       -webkit-transform: rotate(0deg);

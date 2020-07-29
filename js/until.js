@@ -134,10 +134,10 @@ function friendRequest(model, domID) {
   <div class="d-flex">
     <a data-id="${data.id}" data-user="${
       data.email
-    }" class="btn-neon yes"><span></span><span></span></a>
+    }" class="btn-neon yes" onclick=acceptBtn(this)><span></span><span></span></a>
     <a data-id="${data.id}" data-user="${
       data.email
-    }" class="btn-neon no"><span></span><span></span></a>
+    }" class="btn-neon no"onclick=dineBtn(this)><span></span><span></span></a>
   </div>
 </div>`;
     document.getElementById(domID).innerHTML = html;
@@ -148,8 +148,6 @@ function friendOnline(model1, domID) {
   let html = "";
   for (let [index, doc] of model1.entries()) {
     let data = doc.data();
-    console.log(data.email);
-    console.log(model.currentUser);
     if (model.currentUser.friends.indexOf(data.email) >= 0) {
       html += `<div class="d-flex flex-spacebetween border-solid border-curved">
 <div class="d-flex"><img class="round-box small-img" src="${
@@ -168,6 +166,41 @@ function friendOnline(model1, domID) {
 }
 
 function acceptBtn(dom) {
+  console.log(dom)
+  debugger
+  // let btnGroups = document.querySelectorAll(`#${dom} .yes`);
+  // for (let i = 0; i < btnGroups.length; i++) {
+  //   btnGroups[i].onclick = function (e) {
+  //     let check = e.target;
+  //     let userSent = e.target.dataset.user;
+  //     let sentId = e.target.dataset.id;
+  //     console.log(check, userSent, sentId);
+  //     if (dom == "friend-invite") {
+  //       // db.collection("game").where("")
+  //     }
+  //   };
+  // }
+  let idSent = dom.dataset.id
+  let thisEmail = dom.dataset.user
+  db.collection('user').doc(idSent).update({
+    friends: firebase.firestore.FieldValue.arrayUnion(
+      model.currentUser.email
+    ),
+    friendSent: firebase.firestore.FieldValue.arrayRemove(
+      model.currentUser.email
+    ),
+  })
+  db.collection('user').doc(model.currentUser.id).update({
+    friends: firebase.firestore.FieldValue.arrayUnion(
+      thisEmail
+    ),
+    friendRequest: firebase.firestore.FieldValue.arrayRemove(
+      thisEmail
+    ),
+  })
+}
+function dineBtn(dom) {
+  debugger
   let btnGroups = document.querySelectorAll(`#${dom} .yes`);
   for (let i = 0; i < btnGroups.length; i++) {
     btnGroups[i].onclick = function (e) {
@@ -181,7 +214,6 @@ function acceptBtn(dom) {
     };
   }
 }
-
 function outNavbar(e) {
   if (document.body.classList.contains("show-user-detail")) {
     if (!document.getElementById("sidenav").contains(e.target)) {

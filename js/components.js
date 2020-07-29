@@ -163,7 +163,7 @@ components.menuGame = `<div id="sidenav" class="sidenav d-flex-col d-flex flex-s
 </div>
   </div>
   <div id="friends" class="border-curved border-solid">
-    <h3>Online <span id="count-online">4</span></h3>
+    <h3>Online <span id="count-online"></span></h3>
     <div id="list-online" class="block-friends">
     </div>
   </div>

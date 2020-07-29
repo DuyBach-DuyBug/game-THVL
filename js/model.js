@@ -14,7 +14,8 @@ let model = {
     game: null,
     gameFinding: null,
     dataShip:[],
-    mapShip: null
+    mapShip: null,
+    gamePLaying: null,
 }
 // model.saveConverstations = function (converstations) {
 //     model.converstations = converstations

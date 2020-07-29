@@ -1,0 +1,159 @@
+html,
+body {
+  /* overflow-x: hidden; */
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.game-div {
+ 
+  height: 65vh;
+  width: 65vw;
+  /* margin-bottom: 50px; */
+}
+
+.bottom-div {
+  /* background:blue; */
+  min-height: 15vh;
+}
+
+div.game-div div.row {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+  height: calc(100% / 8);
+  margin: 0px;
+  padding: 0px;
+}
+.row .border {
+  border: 1px solid black !important;
+
+}
+
+div.game-div div.row div {
+
+  border: 0.7px solid #656264;
+}
+
+@keyframes changesOpacityX {
+  from {
+    opacity: 0.9;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes changesOpacityO {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.9;
+  }
+}
+
+div.game-div img {
+  top: 25px;
+  left: 25px;
+  max-width: 90%;
+  max-height: 90%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+div.game-div div.row img.x {
+  filter: brightness(70%);
+  z-index: 1;
+  cursor: pointer;
+  opacity: 0;
+
+}
+
+div.game-div div.row img.o {
+  filter: brightness(70%);
+  z-index: 3;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.choosen {
+  opacity: 1;
+  position: absolute;
+}
+
+div#gameDiv .row {
+  display: none;
+}
+
+div#actualPlayer {
+  margin-bottom: 50px;
+}
+
+@media screen and (max-width: 480px) {
+  img {
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: 815px) {
+  img {
+    width: 100px;
+  }
+}
+
+/* golden star and table css */
+
+.golden-star {
+  color: #ffd700;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+
+.footer {
+   padding-top: 30px;
+    bottom: 0;
+    color: white;
+    height: 100%;
+    left: 0;
+    position: relative; 
+    width:100%;
+
+}
+
+
+
+body > .container {
+  padding: 20px 15px 0;
+
+}
+
+.footer i {
+  width: 20px;
+  height: 20px;
+}
+
+.footer a {
+  border-radius: 30px;
+  font-size: 1.3rem;
+  background-color: #8a8a8a ;
+  padding: 20px;
+  color: #fefefe;
+}
+
+.footer a:hover {
+  color: #4a4a4a;
+  transition: color 0.3s ease-in;
+}
+
+
+
+code {
+  font-size: 80%;
+}

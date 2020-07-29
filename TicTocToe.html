@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>M-Tic A-Tac X-Toe</title>
+  <link rel="icon" href="images/favicon.ico">
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <link href="style/TicTocToe.css" rel="stylesheet">
+  
+
+</head>
+
+<body>
+
+  <header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md    mx-auto ">
+      <div class="mx-auto">
+        <h2>M-Tic A-Tac X-Toe</h2>
+      </div>
+    </nav>
+  </header>
+
+
+  <main role="main">
+    <div class="row align-items-center ">
+      <div id="actualPlayer" hidden class="col-sm text-center">
+        <div class="">
+          <h2 id="actualPlayerHeader"></h2>
+          <img class="x" id="x" hidden src="images/x-icon.png" />
+          <img class="o" id="o" hidden src="images/o-icon.png" />
+        </div>
+      </div>
+
+      <div id="gameDiv" class="col-sm  pb-6  game-div  mx-auto">
+        <div class="col-md-5 mx-auto">
+          <div class="text-center" id="form-div">
+            <form class="form" id="myForm" method="post">
+
+              <h3>Choose Letter</h3>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="xName">X</label>
+                  <input type="text" class="form-control" id="xName" placeholder="X Name" required autocomplete="off">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="oName">O</label>
+                  <input type="text" class="form-control" id="oName" placeholder="O Name" required autocomplete="off">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Begin <i class="fas fa-user-plus"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="row">
+          <div id="a0" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="a1" class="col tic-tac-toe border-top-0 border" data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="a2" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="a3" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="a4" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="a5" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="a6" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="a7" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+        </div>
+        <div class="row">
+          <div id="b0" class="col tic-tac-toe border-left-0 border" data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="b1" class="col tic-tac-toe border " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="b2" class="col tic-tac-toe border-right-0 border" data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="b3" class="col tic-tac-toe border-left-0 border" data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="b4" class="col tic-tac-toe border " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="b5" class="col tic-tac-toe border-right-0 border" data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="b6" class="col tic-tac-toe border-left-0 border" data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="b7" class="col tic-tac-toe border " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+
+        </div>
+        <div class="row">
+          <div id="c0" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="c1" class="col tic-tac-toe border-bottom-0 border" data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="c2" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="c3" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="c4" class="col tic-tac-toe border-bottom-0 border" data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="c5" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="c6" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="c7" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+        </div>
+        <div class="row">
+          <div id="d0" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="d1" class="col tic-tac-toe border-bottom-0 border" data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="d2" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="d3" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="d4" class="col tic-tac-toe border-bottom-0 border" data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="d5" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="d6" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="d7" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+        </div>
+        <div class="row">
+          <div id="e0" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="e1" class="col tic-tac-toe border-bottom-0 border" data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="e2" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="e3" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="e4" class="col tic-tac-toe border-bottom-0 border" data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="e5" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="e6" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="e7" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+        </div>
+        <div class="row">
+          <div id="f0" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="f1" class="col tic-tac-toe border-bottom-0 border" data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="f2" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="f3" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="f4" class="col tic-tac-toe border-bottom-0 border" data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="f5" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="f6" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="f7" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+        </div>
+        <div class="row">
+          <div id="g0" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="g1" class="col tic-tac-toe border-bottom-0 border" data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="g2" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="g3" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="g4" class="col tic-tac-toe border-bottom-0 border" data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="g5" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="g6" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="g7" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+        </div>
+        <div class="row">
+          <div id="h0" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="h1" class="col tic-tac-toe border-bottom-0 border" data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="h2" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="h3" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="h4" class="col tic-tac-toe border-bottom-0 border" data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="h5" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="h6" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+          <div id="h7" class="col tic-tac-toe " data-name="letterDiv">
+            <img class="x" name="x" src="images/x-icon.png" />
+            <img class="o" name="o" src="images/o-icon.png" />
+          </div>
+        </div>
+      </div>
+
+      <div id="playersScore" hidden class="col-sm text-center">
+        <div class="container">
+          <h2>Current Stats</h2>
+          <table class="table" id="statsTable">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Players</th>
+                <th>Victories</th>
+              </tr>
+            </thead>
+            <tbody id="statsTableBody">
+              <tr>
+                <td class="star"></td>
+                <!-- <i class="golden-star fas fa-star"></i> -->
+                <td> </td>
+                <td></td>
+              </tr>
+              <tr>
+                <td class="star"></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <th>Match Draws:</th>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <button type="button" class="btn btn-outline-danger" name="button">Restart Match Stats <i class=" fas fa-power-off"></i></button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer text-center">
+
+    <ul class="list-inline menu simple ">
+      <li class="list-inline-item"><a target="_blank" href="#"><i class="fas fa-suitcase" aria-hidden="true"></i></a></li>
+      <li class="list-inline-item"><a target="_blank" href="#"><i class="fab fa-github" aria-hidden="true"></i></a></li>
+      <li class="list-inline-item"><a target="_blank" href="#"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a></li>
+      <li class="list-inline-item"><a target="_blank" href="#"> <i class="fab fa-medium-m" aria-hidden="true"></i> </a></li>
+      <li class="list-inline-item"><a target="_blank" href="#"> <i class="fab fa-facebook-f" aria-hidden="true"></i> </a></li>
+    </ul>
+
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script type="text/javascript" src="js/TicTocToe.js"></script>
+</body>
+
+</html>

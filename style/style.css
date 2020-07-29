@@ -104,6 +104,10 @@ button {
   position: relative;
 }
 
+.disable-click {
+  pointer-events: none;
+}
+
 .nav-bar {
   padding: 10px 20px;
   -webkit-box-pack: justify;
@@ -295,6 +299,7 @@ button {
   -o-object-position: center;
      object-position: center;
   width: 100%;
+  height: 100%;
 }
 
 .row-input {
@@ -926,5 +931,107 @@ canvas#gameBrick {
   bottom: 0;
   height: 90%;
   height: calc(100% - 70px);
+}
+
+.screen-finding-rank-game {
+  position: relative;
+  height: 100%;
+}
+
+.screen-finding-rank-game #timeFind {
+  text-align: center;
+  font-size: 75px;
+  font-family: "Clock-Number";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.screen-finding-rank-game .block-time {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  margin: auto;
+}
+
+.screen-finding-rank-game .loader {
+  display: block;
+  position: relative;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  width: 350px;
+  height: 350px;
+  margin: auto;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #9370DB;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 6s linear infinite;
+}
+
+.screen-finding-rank-game .loader::after, .screen-finding-rank-game .loader::before {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  border: 3px solid transparent;
+}
+
+.screen-finding-rank-game .loader::before {
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border-top-color: #BA55D3;
+  -webkit-animation: spin 3s linear infinite;
+  animation: spin 9s linear infinite;
+}
+
+.screen-finding-rank-game .loader::after {
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border-top-color: #FF00FF;
+  -webkit-animation: spin 1.5s linear infinite;
+  animation: spin 4.5s linear infinite;
+}
+
+.view-gameBrick {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.view-gameBrick h3 {
+  padding: 0 20px;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
 /*# sourceMappingURL=style.css.map */

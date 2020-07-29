@@ -1,63 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="1.css">
-</head>
+    <link rel="stylesheet" href="1.css" />
+    <link rel="stylesheet" href="style/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<body>
-    <div class="container" id="container">
-        <div class="form-container sign-up-container">
-            <form class="form" id="form-sign-up">
-                <h1>Create Account</h1>
-                <span>Use your email for registration</span>
-                <input type="text" placeholder="Name" name="name"/>
-                <div class="message-error" id="name-error"></div>
-                <input type="email" placeholder="Email" name="email"/>
-                <div class="message-error" id="email-error"></div>
-                <input type="password" placeholder="Password" name="password"/>
-                <div class="message-error" id="password-error"></div>
-                <input type="password" placeholder="Password-Confirmation" name="passwordConfirmation"/>
-                <div class="message-error" id="password-confirmation-error"></div>
-                <button id="sign-up-btn">Sign Up</button>
-                <div class="message-error" id="sign-up-error"></div>
-                <div class="message-success" id="sign-up-success"></div>
-            </form>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css"
+    />
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyDKNObltdnxySGbUaqSjyNJTAwEB2N02N4",
+        authDomain: "gamethvl.firebaseapp.com",
+        databaseURL: "https://gamethvl.firebaseio.com",
+        projectId: "gamethvl",
+        storageBucket: "gamethvl.appspot.com",
+        messagingSenderId: "277560623541",
+        appId: "1:277560623541:web:a17f9a16be848c2da999fc",
+        measurementId: "G-ZJL8RGGQC0",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+      const database = firebase.database();
+      const db = firebase.firestore();
+      const auth = firebase.auth();
+      const storage = firebase.storage();
+      const timeSever = firebase.firestore.FieldValue.serverTimestamp();
+    </script>
+  </head>
+
+  <body>
+    <div class="gameShip-section">
+      <div>
+        <div id="shortTime"></div>
+        <div id="longTime"></div>
+      </div>
+      <div class="d-flex">
+        <div class="col-50 d-flex">
+          <div id="myShip" class="table-ship">
+            <h2>Place Your Ships</h2>
+            <ul class="fleet-roster">
+              <li id="patrolboat">Patrol Boat (1x1)</li>
+              <li id="submarine">Submarine (1x2)</li>
+              <li id="destroyer">Destroyer (1x3)</li>
+              <li id="battleship">Battleship (1x4)</li>
+              <li id="carrier">Aircraft Carrier (1x5)</li>
+            </ul>
+            <button id="rotate-button" data-direction="0">Rotate Ship</button>
+            <button id="start-game" class="hidden">Start Game</button>
+          </div>
+          <div class="">
+            <h3>My sea</h3>
+            <div id="mySea" class="map-box"></div>
+          </div>
         </div>
-        <div class="form-container sign-in-container">
-            <form class="form" id="form-sign-in">
-                <h1 class="h1">Sign in</h1>
-                <span class="span">Use your account</span>
-                <input type="email" placeholder="Email" name="email"/>
-                <div class="message-error" id="email-error"></div>
-                <input type="password" placeholder="Password" name="password"/>
-                <div class="message-error" id="password-error"></div>
-                <a class="a">Forgot your password?</a>
-                <button id="sign-in-btn">Sign In</button>
-                <div class="message-error" id="sign-in-error"></div>
-                <div class="message-success" id="sign-in-success"></div>
-                
-            </form>
+        <div class="col-50 d-flex">
+          <div>
+            <h3>Enemy sea</h3>
+            <div id="enemySea" class="map-box"></div>
+          </div>
+          <div class=""></div>
         </div>
-        <div class="overlay-container">
-            <div class="overlay">
-                <div class="overlay-panel overlay-left">
-                    <h1 class="h1">Welcome Back!</h1>
-                    <p class="p">To keep connected with us please login with your personal info</p>
-                    <button class="ghost" id="signIn" onclick="signInAction()">Sign In</button>
-                </div>
-                <div class="overlay-panel overlay-right">
-                    <h1 class="h1">Hello, Friend!</h1>
-                    <p class="p">Enter your personal details and start journey with us</p>
-                    <button class="ghost" id="signUp" onclick = "signUpAction()">Sign Up</button>
-                </div>
-            </div>
-        </div>
-        </div>
+      </div>
+    </div>
     <script src="1.js"></script>
-</body>
-
+  </body>
 </html>

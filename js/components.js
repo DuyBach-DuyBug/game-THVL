@@ -100,18 +100,9 @@ components.menuGame = `<div id="sidenav" class="sidenav d-flex-col d-flex flex-s
     <div class="col-60 d-flex d-flex-col flex-spacebetween">
       <h4>XO</h4>
       <p>
-        What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the
-        printing and typesetting industry. Lorem Ipsum has been the
-        industry's standard dummy text ever since the 1500s, when an
-        unknown printer took a galley of type and scrambled it to make a
-        type specimen book. It has survived not only five centuries, but
-        also the leap into electronic typesetting, remaining essentially
-        unchanged. It was popularised in the 1960s with the release of
-        Letraset sheets containing Lorem Ipsum passages, and more
-        recently with desktop publishing software like Aldus PageMaker
-        including versions of Lorem Ipsum.
+        Comming Soon
       </p>
-      <button id="play-xo">Play</button>
+      <button data-game="xo" id="play-xo" class="disable-click">Play</button>
     </div>
   </div>
 
@@ -120,18 +111,16 @@ components.menuGame = `<div id="sidenav" class="sidenav d-flex-col d-flex flex-s
       <div
         class="bg-op-50 game-img"
         style="
-          background-image: url(asset/0876479dd728a4555ef519eb5d346419.png);
+          background-image: url(asset/brick-breaker.jpg);
         "
       ></div>
     </div>
     <div class="col-60 d-flex d-flex-col flex-spacebetween">
       <h4>Brick</h4>
       <p>
-        What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the
-        printing and typesetting industry. Lorem Ipsum has been the
-        industry's standard dummy text ever since the 1500s, when an
+        Game chơi 1 mình và lấy điểm cao nhất
       </p>
-      <button id="play-brick">Play</button>
+      <button data-game="brick" id="play-brick">Play</button>
     </div>
   </div>
 
@@ -145,12 +134,9 @@ components.menuGame = `<div id="sidenav" class="sidenav d-flex-col d-flex flex-s
     <div class="col-60 d-flex d-flex-col flex-spacebetween">
       <h4>Battleshit board</h4>
       <p>
-        Why do we use it? It is a long established fact that a reader
-        will be distracted by the readable content of a page when
-        looking at its layout. The point of using Lorem Ipsum is that it
-        has a more-or-less normal distribution of letters, as opposed to
+        Comming Soon
       </p>
-      <button>Play</button>
+      <button data-game="ship" id="play-ship" class="disable-click">Play</button>
     </div>
   </div>
 </div>
@@ -177,14 +163,14 @@ components.menuGame = `<div id="sidenav" class="sidenav d-flex-col d-flex flex-s
 </div>
   </div>
   <div id="friends" class="border-curved border-solid">
-    <h3>Online <span id="count-online">4</span></h3>
+    <h3>Online <span id="count-online"></span></h3>
     <div id="list-online" class="block-friends">
     </div>
   </div>
 </div>
 </div>
 <div id="modal" class="modal border-curved border-solid"></div>`;
-components.gameBrick = `<a id="exitGame" class="btn-neon"><span></span><span></span>Exit</a><canvas id="gameBrick"></canvas>`;
+components.gameBrick = `<div class="view-gameBrick d-flex flex-spacebetween"><a id="exitGame" class="btn-neon"><span></span><span></span>Exit</a><h3 id="location-time"></h3></div><canvas id="gameBrick"></canvas>`;
 components.gameXo = `<header class="nav-bar d-flex">
 <div class="nav-user d-flex">
   <a onclick="userDetail()" id="user-detail">
@@ -217,7 +203,7 @@ components.gameXo = `<header class="nav-bar d-flex">
   </div>
 </div>
 </div>`;
-
+components.gameShip = `<div class="view-gameBrick d-flex flex-spacebetween"><a id="exitGame" class="btn-neon"><span></span><span></span>Exit</a><h3 id="location-time"></h3></div>`
 
 
 let modal = {};
@@ -238,11 +224,6 @@ modal.btnFriends = `<div id="friend_section">
   </div>
   <h4>Your friends</h4>
   <div id="my-friend" class="d-flex border-solid border-curved">
-    <div class="d-flex flex-spacebetween border-solid border-curved">
-      <img class="round-box small-img" src="asset/woman-avatar.png" />
-      <p>asdasd</p>
-      <span class="status round-box online"></span>
-    </div>
   </div>
 </div>
 </div>`;
@@ -256,5 +237,11 @@ modal.btnInvite = `<div id="friend_section">
 </div>`;
 modal.findType = `<a id="findRank" data-typeGame="findRank" class="btn-neon"><span></span><span></span>Rank</a>
 <a id="findCustom"  data-typeGame="findCustom" class="btn-neon"><span></span><span></span>Custom</a>`;
-modal.findRank = `<div><div id="back">Back</div><div id="countDown"></div></div>`
+modal.findRank = `<div class="screen-finding-rank-game">
+<div class="btn-neon" id="back">Back</div>
+<div class="block-time">
+<div id="timeFind"></div>
+<div class="loader"></div>
+</div>
+</div>`
 modal.findCustom = `<div><div id="back">Back</div><form id="findFriend"><input type="email" name="email"><button>Find</button></form><div id="waitting-sent"></div></div>`

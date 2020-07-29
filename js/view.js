@@ -178,7 +178,7 @@ view.showScreen = async function (screenName) {
       content.innerHTML = components.menuGame;
 
       view.userShow();
-      view.locationTime("location-time");
+      view.locationTime();
       controller.scoreboard("xo");
       controller.scoreboard("ship");
       controller.scoreboard("brick");
@@ -220,12 +220,27 @@ view.showScreen = async function (screenName) {
         };
       }
 
-      document.getElementById("play-xo").onclick = function () {
-        controller.modal("findType");
-      };
+      // document.getElementById("play-xo").onclick = function () {
+      //   controller.modal("findType");
+      // };
       document.getElementById("play-brick").onclick = function () {
         view.showScreen("gameBrick");
       };
+      document.getElementById("play-ship").onclick = function () {
+        view.showScreen("gameShip");
+      };
+      // for(let btn of document.querySelectorAll('.game-box button')){
+      //   btn.onclick = function(e){
+      //     let typeGame = e.target.dataset.game
+      //     if(typeGame == "brick"){
+      //       view.showScreen("gameBrick");
+      //     } else{
+      //       controller.modal("findType");
+      //       model.game = model.myScore[typeGame]
+      //       model.game['name'] = typeGame
+      //     }
+      //   }
+      // }
       break;
 
     case "gameXo":
@@ -236,9 +251,16 @@ view.showScreen = async function (screenName) {
     case "gameBrick":
       content.innerHTML = components.gameBrick;
       game.brick();
-      document.getElementById('exitGame').onclick = function(){
+      document.getElementById("exitGame").onclick = function () {
         view.showScreen("menuGame");
-      }
+      };
+      break;
+    case "gameShip":
+      content.innerHTML = components.gameShip;
+      game.ship();
+      document.getElementById("exitGame").onclick = function () {
+        view.showScreen("menuGame");
+      };
       break;
   }
 };
@@ -247,7 +269,7 @@ view.userShow = function () {
   let user = auth.currentUser;
   db.collection("user")
     .doc(user.uid)
-    .onSnapshot(function (doc) {
+    .onSnapshot(async function (doc) {
       console.log("Current data: ", doc.data());
       let userData = doc.data();
       model.currentUser = userData;
@@ -260,17 +282,33 @@ view.userShow = function () {
       // image
       if (userData.avatarUrl) {
         let userAvatar = document.querySelectorAll(".userAvatar");
+        let resizeImg;
+        try {
+          resizeImg = await storage
+            .ref()
+            .child(`image_users/${user.uid}/avatar_210x210`)
+            .getDownloadURL();
+          // console.log(resizeImg);
+          // .then(function(url) {
+          //   return url
+          // })
+        } catch (error) {
+          console.log(error);
+          resizeImg = await storage
+            .ref()
+            .child(`image_users/${user.uid}/avatar`)
+            .getDownloadURL();
+          // .then(function(url) {
+          //   return url
+          // })
+        }
+        // console.log(resizeImg)
         for (let i = 0; i < userAvatar.length; i++) {
-          userAvatar[i].src = userData.avatarUrl;
+          userAvatar[i].src = resizeImg;
         }
       }
       // notification
       notification(userData);
-      // friend list
-      model.friendList = userData.friends;
-      for (let i of model.friendList) {
-        // document.getElementById("my-friend").innerHTML = model.friendList;
-      }
     });
 };
 
@@ -296,7 +334,7 @@ view.createBoard = async function (ratio) {
   dom.style.width = 30 * ratio + "px";
 };
 
-view.locationTime = function (id) {
+view.locationTime = function () {
   let now = new Date();
   let h = now.getHours();
   let m = now.getMinutes();
@@ -309,7 +347,7 @@ view.locationTime = function (id) {
   }
   m = checkTime(m);
   s = checkTime(s);
-  document.getElementById(id).innerHTML = `${h}:${m}:${s} ${
+  document.getElementById("location-time").innerHTML = `${h}:${m}:${s} ${
     h > 12 ? "PM" : "AM"
   }`;
   setTimeout(view.locationTime, 500);
